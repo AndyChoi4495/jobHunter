@@ -120,6 +120,7 @@
 - **사용자가 정한 범위:** 소프트웨어 개발, Data/AI/Research, QA/Test는 남긴다. IT/Network/Systems, Hardware/FPGA/Embedded, 비즈니스/BI, 마케팅/영업, 은행, 평가자는 뺀다.
 - **넓은 단어 하나가 진짜 개발 직무까지 지우는 경우에는 제외어를 구문으로 쓴다.** `business`가 "Application Developer Co-op – Enterprise Technology & Business Management"를 지워서 `business analyst`, `business intelligence` 같은 구문으로 바꿨다. `sales`가 "Data Analyst Intern – Global Sales"를 지워서 `sales strategy`, `sales representative`로 바꿨다.
 - **`engineer`만으로는 다른 분야 엔지니어링이 들어온다.** 그래서 mechatronics, automotive, power system, firmware, certification 등을 제외한다. Compiler, kernel, Linux, Forward Deployed 엔지니어는 그대로 통과한다.
+- **`bi`도 제외한다**(나중에 추가). 약어라서 `business intelligence`에 걸리지 않았다. 2026-11-09 데이터 기준으로 정확히 2건이 빠진다. "BI/Data Analyst Intern"과 프랑스어 "Développeur BI" 코업이다(650 → 648).
 - **보안 직무는 뺀다**(예: "Security Analyst Intern"). 사용자의 선택에 따라 `security`는 직무 단어에 넣지 않는다. 보안 *엔지니어링* 제목은 `engineer`로 계속 통과한다.
 - **알고 있는 대가:** `fpga` 때문에 "FPGA Software Tool Developer Co-op"도 빠진다. 단순하게 두려고 감수한다.
 - **2026-11-09 데이터 결과:** 캐나다 공고 838건 → 650건. 이미 Notion에 들어간 페이지는 이걸로 지워지지 않는다. 보드는 실행마다 새로 만들어지므로 저절로 반영된다.
