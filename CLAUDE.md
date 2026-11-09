@@ -6,7 +6,18 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project Status
 
-Planning stage, no source code yet. jobHunter is a personal job-search automation tool: Python scripts run by GitHub Actions cron collect postings from community job-list GitHub repos (SimplifyJobs JSON, Francklin9999/canada-internship markdown; JSearch API is an optional, off-by-default extra), store them in a Notion database (which doubles as the UI), and send Discord webhook alerts. The repo is public as a portfolio, and a read-only static job board (`site/`, GitHub Pages) is built from collected postings only. Never let Notion data (application status, notes) flow into anything published. See `plan.md` for the architecture, `checklist.md` for progress, and `context-notes.md` for the reasoning behind each decision (each has a Korean `.ko.md` twin; see §12). Once the project is scaffolded, add the commands (build, lint, test, running a single test) here.
+Phase 1 in progress (scaffold done). jobHunter is a personal job-search automation tool: Python scripts run by GitHub Actions cron collect postings from community job-list GitHub repos (SimplifyJobs JSON, Francklin9999/canada-internship markdown; JSearch API is an optional, off-by-default extra), store them in a Notion database (which doubles as the UI), and send Discord webhook alerts. The repo is public as a portfolio, and a read-only static job board (`site/`, GitHub Pages) is built from collected postings only. Never let Notion data (application status, notes) flow into anything published. See `plan.md` for the architecture, `checklist.md` for progress, and `context-notes.md` for the reasoning behind each decision (each has a Korean `.ko.md` twin; see §12). 
+
+## Commands
+
+Python 3.9+, src layout (`src/jobhunter`), venv at `.venv`.
+
+```sh
+python3 -m venv .venv && .venv/bin/pip install -U pip && .venv/bin/pip install -e '.[dev]'   # setup (system pip 21 can't do editable installs)
+.venv/bin/ruff check .                               # lint
+.venv/bin/pytest                                     # all tests
+.venv/bin/pytest tests/test_config.py::test_name     # single test
+```
 
 ## Behavioral Guidelines
 

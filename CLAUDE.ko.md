@@ -8,7 +8,18 @@
 
 ## 프로젝트 현황
 
-계획 단계이고 아직 소스 코드는 없다. jobHunter는 개인용 구직 자동화 도구다. GitHub Actions cron이 Python 스크립트를 실행해 커뮤니티 공고 목록 GitHub 저장소(SimplifyJobs JSON, Francklin9999/canada-internship 마크다운)에서 공고를 수집한다. JSearch API는 기본으로 꺼 둔 선택 출처다. 수집한 공고는 Notion 데이터베이스에 저장하고(Notion이 UI 역할도 한다), Discord 웹훅으로 알림을 보낸다. 저장소는 포트폴리오로 공개하며, 읽기 전용 정적 공고 보드(`site/`, GitHub Pages)는 수집한 공고만으로 만든다. Notion 데이터(지원 상태, 메모)가 공개되는 어떤 곳에도 흘러가면 안 된다. 구조는 `plan.md`, 진행 상황은 `checklist.md`, 결정 이유는 `context-notes.md`에 있다(각각 한국어 `.ko.md` 쌍이 있다. 12절 참고). 프로젝트 골격이 생기면 빌드, 린트, 테스트, 단일 테스트 실행 명령을 여기에 추가한다.
+1단계 진행 중이다(스캐폴드 완료). jobHunter는 개인용 구직 자동화 도구다. GitHub Actions cron이 Python 스크립트를 실행해 커뮤니티 공고 목록 GitHub 저장소(SimplifyJobs JSON, Francklin9999/canada-internship 마크다운)에서 공고를 수집한다. JSearch API는 기본으로 꺼 둔 선택 출처다. 수집한 공고는 Notion 데이터베이스에 저장하고(Notion이 UI 역할도 한다), Discord 웹훅으로 알림을 보낸다. 저장소는 포트폴리오로 공개하며, 읽기 전용 정적 공고 보드(`site/`, GitHub Pages)는 수집한 공고만으로 만든다. Notion 데이터(지원 상태, 메모)가 공개되는 어떤 곳에도 흘러가면 안 된다. 구조는 `plan.md`, 진행 상황은 `checklist.md`, 결정 이유는 `context-notes.md`에 있다(각각 한국어 `.ko.md` 쌍이 있다. 12절 참고). 
+
+## 명령
+
+Python 3.9 이상, src 레이아웃(`src/jobhunter`), 가상환경은 `.venv`다.
+
+```sh
+python3 -m venv .venv && .venv/bin/pip install -U pip && .venv/bin/pip install -e '.[dev]'   # 셋업 (시스템 pip 21은 editable 설치를 못 한다)
+.venv/bin/ruff check .                               # 린트
+.venv/bin/pytest                                     # 전체 테스트
+.venv/bin/pytest tests/test_config.py::test_name     # 단일 테스트
+```
 
 ## 행동 지침
 
