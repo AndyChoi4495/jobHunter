@@ -2,9 +2,11 @@
 
 This file provides guidance to Claude Code (claude.ai/code) when working with code in this repository.
 
+**English** | [한국어](CLAUDE.ko.md)
+
 ## Project Status
 
-Planning stage, no source code yet. jobHunter is a personal job-search automation tool: Python scripts run by GitHub Actions cron collect postings from community job-list GitHub repos (SimplifyJobs JSON, Francklin9999/canada-internship markdown; JSearch API is an optional, off-by-default extra), store them in a Notion database (which doubles as the UI), and send Discord webhook alerts. The repo is public as a portfolio, and a read-only static job board (`site/`, GitHub Pages) is built from collected postings only. Never let Notion data (application status, notes) flow into anything published. See `plan.md` for the architecture, `checklist.md` for progress, and `context-notes.md` for the reasoning behind each decision. Once the project is scaffolded, add the commands (build, lint, test, running a single test) here.
+Planning stage, no source code yet. jobHunter is a personal job-search automation tool: Python scripts run by GitHub Actions cron collect postings from community job-list GitHub repos (SimplifyJobs JSON, Francklin9999/canada-internship markdown; JSearch API is an optional, off-by-default extra), store them in a Notion database (which doubles as the UI), and send Discord webhook alerts. The repo is public as a portfolio, and a read-only static job board (`site/`, GitHub Pages) is built from collected postings only. Never let Notion data (application status, notes) flow into anything published. See `plan.md` for the architecture, `checklist.md` for progress, and `context-notes.md` for the reasoning behind each decision (each has a Korean `.ko.md` twin; see §12). Once the project is scaffolded, add the commands (build, lint, test, running a single test) here.
 
 ## Behavioral Guidelines
 
@@ -78,18 +80,27 @@ When the user writes in Korean, your output is also Korean:
 - The test: every Korean sentence terminator should be `.`, `?`, or `!` — not `:`.
 - Colons are fine inside code, key-value pairs, or labels. Not as sentence enders.
 
-## 6. File Header Comments in Korean
+## 6. File Header Comments (Korean + English)
 
-**First line of every new source file: a one-line Korean comment stating its role.**
+**First lines of every new source file: a one-line Korean comment stating its role, followed by the same in English.**
 
 When creating a new file:
-- TypeScript/JavaScript: `// 사용자 인증 상태를 관리하는 Context Provider`
-- Python: `# KIS API 호출을 비동기로 래핑하는 클라이언트`
-- SQL: `-- 일별 집계 결과를 저장하는 머티리얼라이즈드 뷰`
+- TypeScript/JavaScript:
+  ```ts
+  // 사용자 인증 상태를 관리하는 Context Provider
+  // Context provider that manages user auth state
+  ```
+- Python:
+  ```python
+  # KIS API 호출을 비동기로 래핑하는 클라이언트
+  # Client that wraps KIS API calls asynchronously
+  ```
+- SQL: `-- 일별 집계 결과를 저장하는 머티리얼라이즈드 뷰` / `-- Materialized view storing daily aggregates`
 - Place it directly under required directives (`'use client'`, `'use server'`, shebang).
 - Skip config files (`*.config.ts`, `package.json`, etc.).
+- All other comments, identifiers, and docstrings are in English.
 
-Why: agents read files selectively, not whole codebases. A one-line Korean header gives instant context so the next session (human or agent) can navigate without re-reading the entire file.
+Why: agents read files selectively, not whole codebases. A one-line header gives instant context so the next session (human or agent) can navigate without re-reading the entire file. The repo is a public portfolio, so English readers need it too (see §12).
 
 ## 7. Plan + Checklist + Context Notes
 
@@ -142,6 +153,16 @@ This is the step LLMs skip most often after "run tests". They guess from error k
 - **No broadcast.** Never send a message to all teammates at once. Message only the specific teammate (or the lead) who needs it.
 - **Shut down immediately when done.** Once your assigned task is finished and reported to the lead, end your session. Don't idle, don't pick up unassigned work.
 - **3-iteration limit.** Any loop (plan revision after rejection, fix → test → fix, retrying a failing step) runs at most 3 times. After the 3rd failed attempt, stop and report to the lead what was tried and what's blocking, instead of trying again.
+
+## 12. Bilingual Docs (English + Korean)
+
+**Every document pushed to GitHub exists in English and Korean, as a pair of files.**
+
+- `X.md` is English (the default GitHub renders); `X.ko.md` is the Korean version. Example: `README.md` / `README.ko.md`, `plan.md` / `plan.ko.md`.
+- Right below the title of each file is a language switch: `**English** | [한국어](X.ko.md)` in the English file, `[English](X.md) | **한국어**` in the Korean one.
+- **Update both files in the same change.** Never edit one without the other; a commit that touches only one side of a pair is incomplete. This includes ticking boxes in `checklist.md` / `checklist.ko.md` and appending to `context-notes.md` / `context-notes.ko.md`.
+- Exception: this `CLAUDE.md` is the English source of truth that Claude Code loads. `CLAUDE.ko.md` is a translation for humans; keep it in sync, but if they ever disagree, `CLAUDE.md` wins.
+- Code is not duplicated: see §6 for comments.
 
 ---
 

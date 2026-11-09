@@ -1,56 +1,65 @@
-# 컨텍스트 노트
+# Context Notes
 
-작업 중 내린 결정과 그 이유를 시간순으로 기록한다.
+**English** | [한국어](context-notes.ko.md)
 
-## 2026-11-09 — 초기 계획
+Decisions made during the work, and why, in chronological order.
 
-- **수집은 직접 크롤링 대신 집계 API를 쓴다.** LinkedIn은 약관상 스크래핑을 금지하고 차단도 강하다. Indeed는 공개 검색 API를 종료했고 크롤링 시 차단이 잦다. JSearch는 Google for Jobs 기반이라 두 사이트의 공고를 모두 포함한다.
-- **사용자는 본인 1인이다.** 인증과 멀티테넌시가 필요 없어 범위가 크게 줄어든다.
-- **UI는 별도 웹앱 대신 Notion DB로 한다.** 사용자 제안이다. 목록, 필터, 보드 뷰, 메모 기능을 Notion이 이미 제공하므로 백엔드 스크립트만 만들면 된다.
-- **알림은 Discord 웹훅으로 보낸다.** 사용자가 선택했다. Notion 자체 알림은 외부에서 트리거하기 어렵다.
-- **실행은 GitHub Actions cron에서 한다.** 서버 없이 무료로 돌릴 수 있고, 비밀값은 Secrets로 관리한다.
-- **언어는 Python으로 한다.** 스크립트 중심이고 API·LLM 연동이 간단하다.
-- **MVP 범위는 수집 + 알림이다.** 지원 현황 관리와 이력서 작성은 2·3단계로 미룬다.
-- **중복 제거는 Notion DB의 `Job ID`로 한다.** 상태 파일을 따로 두지 않아 Actions 실행 간 상태를 공유할 필요가 없다.
+## 2026-11-09 — Initial Plan
 
-- **Meta Muse(개인 AI 에이전트)는 코드로 직접 연동하지 않는다.** 사용자가 말한 "muse"는 Meta의 소비자용 에이전트 Muse다. 외부에서 메시지를 밀어넣는 API가 없어 알림 채널로는 쓸 수 없다. 대신 Muse에 Notion 커넥터가 있어서, 데이터를 Notion에 모아 두면 Muse가 별도 작업 없이 읽고 다룰 수 있다. 그래서 Notion을 단일 저장소로 두는 설계를 유지한다. 2026-11 기준 커넥터 지원 범위는 출처마다 다르니 실제 앱에서 확인해야 한다.
+- **Use an aggregator API instead of scraping directly.** (Later replaced by GitHub job lists as the primary source; see "Switching sources to GitHub job lists" below.) LinkedIn's terms forbid scraping and it blocks aggressively. Indeed shut down its public search API and blocks crawlers often. JSearch is built on Google for Jobs and includes postings from both.
+- **Single user (me).** No auth or multi-tenancy, which shrinks scope considerably.
+- **Notion DB as the UI instead of a separate web app.** The user's suggestion. Notion already provides lists, filters, board views, and notes, so only a backend script is needed.
+- **Alerts via Discord webhook.** The user's choice. Notion's own notifications are hard to trigger externally.
+- **Run on GitHub Actions cron.** Free, no server, Secrets for credentials.
+- **Python.** Script-oriented work; API and LLM integration is simple.
+- **MVP scope is collection + alerts.** Application tracking and resume writing are deferred to phases 2 and 3.
+- **Deduplicate on `Job ID` in the Notion DB.** No separate state file, so nothing needs to be shared between Actions runs.
+- **No code integration with Meta Muse (personal AI agent).** The "muse" the user mentioned is Meta's consumer agent Muse. It has no API for pushing messages in, so it can't be an alert channel. But Muse has a Notion connector, so keeping data in Notion lets Muse read and work with it at no extra cost. This reinforces Notion as the single store. As of 2026-11, sources disagree on connector support, so it needs checking in the actual app.
 
-## 2026-11-09 — 검색 조건
+## 2026-11-09 — Search Criteria
 
-- **직무는 인턴과 신입(New Grad / Associate / Junior) SWE 두 트랙으로 나눈다.** 검색어를 트랙별로 두고 Notion에 `트랙` 속성으로 구분한다. 캐나다는 인턴을 "Co-op"으로 부르는 경우가 많아 검색어에 포함했다.
-- **국가는 지역(region) 단위로 분리한다.** 사용자가 미국을 따로 두고 싶어 했다. 지역마다 Notion DB와 Discord 웹훅을 분리해 섞이지 않게 하고, 미국 추가는 설정 변경만으로 가능하게 한다.
-- **미국은 수집도 꺼 둔다(`enabled: false`).** 사용자는 "알림은 캐나다만"이라고 했다. 미국 공고를 알림 없이 미리 모을지는 명시하지 않았는데, JSearch 할당량을 아끼려고 기본값을 수집도 끄는 쪽으로 정했다. 원하면 `enabled: true`, `notify: false`로 바꿔 알림 없이 수집만 할 수 있다.
-- **원격 여부는 필터하지 않는다.** 사용자가 무관하다고 했다.
-- **시니어 이상 공고는 제목 키워드로 제외한다.** 집계 API의 경력 필터만으로는 부정확할 수 있어 이중으로 거른다.
+- **Two tracks: Intern and New Grad (New Grad / Associate / Junior) SWE.** Queries are per track and the Notion `Track` property distinguishes them. Canada often calls internships "Co-op", so that term is included.
+- **Countries are split into regions.** The user wanted the USA kept separate. Each region has its own Notion DB and Discord webhook so they never mix, and adding the USA is a config change only.
+- **USA collection is also off (`enabled: false`).** The user said "alerts for Canada only" but didn't say whether to pre-collect US postings without alerts. The default turns collection off too, to save JSearch quota. Setting `enabled: true, notify: false` collects without alerting.
+- **No remote filter.** The user said it doesn't matter.
+- **Exclude senior-and-above postings by title keyword.** Aggregator experience filters alone may be inaccurate, so filter twice.
 
-## 2026-11-09 — 수집 출처를 GitHub 공고 목록으로 변경
+## 2026-11-09 — Switching Sources to GitHub Job Lists
 
-사용자가 공고 목록 저장소 4개(파일 기준)를 공유했다. 직접 확인한 내용은 다음과 같다.
+The user shared four job-list files across these repos. Verified directly:
 
-- **SimplifyJobs** (New-Grad-Positions, Summer2027-Internships)는 `.github/scripts/listings.json`에 구조화 데이터가 있다. 기본 브랜치는 `dev`이고 하루에도 여러 번 갱신된다. 확인 시점 기준 활성 공고는 신입 약 3,200건(캐나다 약 150건), 인턴 약 5,300건(캐나다 약 450건)이다. 비개발 직무(Hardware, Quant, Product 등)도 섞여 있어 `category`로 걸러야 한다. 국가 정보는 따로 없어서 `locations` 문자열("Toronto, ON, Canada", "Remote in Canada", "SF")로 판별한다.
-- **Francklin9999/canada-internship**은 캐나다 전용이고 마크다운 표만 있다. 기본 브랜치는 `master`다. 행 형식은 `| 회사 | 제목(NEW 접두어 가능) | 위치 | 비고 | 게시일<br><sub>..</sub> | <a href=URL>Apply</a> | <!--id:0--> |`이다. id 주석은 모두 0이라 쓸 수 없어 URL을 키로 쓴다. 상단에 회사별 집계 표도 있어 "Tech" 섹션 안의 공고 표만 파싱해야 한다. 별 16개 정도의 작은 저장소라 언제 멈출지 모른다.
+- **SimplifyJobs** (New-Grad-Positions, Summer2027-Internships) has structured data in `.github/scripts/listings.json`. Default branch is `dev`, updated several times a day. At the time of checking, active postings were about 3,200 new grad (about 150 in Canada) and about 5,300 intern (about 450 in Canada). Non-dev roles (Hardware, Quant, Product, etc.) are mixed in, so `category` must be filtered. There's no country field; country is inferred from `locations` strings ("Toronto, ON, Canada", "Remote in Canada", "SF").
+- **Francklin9999/canada-internship** is Canada-only and has only Markdown tables. Default branch is `master`. Row format: `| company | title (may be prefixed with NEW) | location | notes | posted<br><sub>..</sub> | <a href=URL>Apply</a> | <!--id:0--> |`. The id comments are all 0 and unusable, so the URL is the key. There's also a per-company summary table at the top, so only the posting tables inside the "Tech" sections should be parsed. It's a small repo (~16 stars) and could stop at any time.
 
-결정은 다음과 같다.
+Decisions:
 
-- **MVP 출처는 이 GitHub 목록들로 한다.** 무료이고 키와 할당량이 없으며, 약관 문제도 없다. 학생·신입 대상으로 이미 선별되어 있어 JSearch 검색 결과보다 품질이 좋을 가능성이 크다. 이 덕분에 MVP 준비에서 RapidAPI 가입이 빠진다.
-- **JSearch는 지우지 않고 선택 출처로 남긴다(기본 비활성).** GitHub 목록이 놓치는 공고를 보완하거나 목록이 멈췄을 때 대체할 수 있다.
-- **`Job ID`는 정규화한 URL로 한다.** 출처 간 ID 체계가 달라서다. 같은 공고가 Simplify와 canada-internship에 모두 있을 수 있으니 회사+제목으로도 병합한다.
+- **The MVP uses these GitHub lists as sources.** Free, no keys or quotas, no terms-of-service issues. They're already curated for students and new grads, so quality is likely better than JSearch search results. This also removes RapidAPI signup from MVP setup.
+- **JSearch stays as an optional source (off by default).** It can fill gaps in the GitHub lists or replace them if they stop.
+- **`Job ID` is the normalized URL.** ID schemes differ between sources. The same posting may appear in both Simplify and canada-internship, so company + title is also used for merging.
 
-## 2026-11-09 — 포트폴리오 공개 범위
+## 2026-11-09 — Portfolio Visibility
 
-- **공개 범위는 코드와 공개 공고 보드로 한다.** 사용자가 선택했다. 외부인은 읽기만 가능하다.
-- **지원 현황은 공개하지 않는다.** 지원한 회사와 단계가 다른 채용 담당자에게 보이면 불리할 수 있다. 보드 데이터는 Notion이 아니라 수집 결과에서 만들어서, 개인 필드가 섞일 경로를 구조적으로 막는다.
-- **보드는 GitHub Pages 정적 페이지로 한다.** 서버와 비용이 없고 Actions 실행과 같은 흐름에서 배포된다. 빌드 도구 없는 HTML과 JS라 유지보수가 가볍다. 나중에 웹 UI를 키울 일이 생기면 그때 프레임워크를 검토한다.
-- **Pages는 아티팩트 배포 방식으로 한다.** 데이터를 커밋하는 방식은 하루 2회씩 봇 커밋이 쌓여 포트폴리오 저장소의 히스토리를 어지럽힌다.
-- **소스 저장소 3곳 모두 라이선스가 명시되지 않았다**(GitHub API로 확인). 출처를 표기하고 걸러낸 일부만 링크와 함께 보여주며, 출처별로 보드에서 뺄 수 있게 한다.
-- **저장소를 공개해도 비밀값은 안전하다.** 비밀값은 모두 GitHub Secrets와 로컬 `.env`에만 두고, config에는 환경변수 이름만 적는다.
+- **Public scope is the code and a public job board.** The user's choice. Outsiders can only read.
+- **Application status is not public.** Having the companies and stages applied to visible to other recruiters could hurt. Board data comes from collection results, not Notion, which structurally prevents personal fields from leaking.
+- **The board is a static GitHub Pages page.** No server or cost, and it deploys in the same Actions run. Plain HTML and JS with no build tooling keeps maintenance light. A framework can be considered later if the web UI grows.
+- **Pages uses artifact deployment.** Committing data would pile up bot commits twice a day and clutter the portfolio repo's history.
+- **None of the three source repos declares a license** (verified via the GitHub API). Credit sources, show only a filtered subset with links, and allow dropping any source from the board.
+- **Secrets stay safe in a public repo.** All secrets live only in GitHub Secrets and the local `.env`; config holds only environment variable names.
 
-## 열린 질문
+## 2026-11-09 — git Setup
 
-- 3단계(이력서 맞춤 작성)를 Claude API로 자동화할지, Muse가 Notion 페이지를 읽고 작성하도록 수동으로 맡길지 정하지 않았다.
-- 캐나다 안에서 특정 도시(토론토, 밴쿠버 등)로 좁힐지 정하지 않았다. 현재는 캐나다 전체다.
+- **Planning docs (plan, checklist, context-notes, CLAUDE.md) are public.** The user's decision. The design process itself becomes part of the portfolio.
+- **Commit email is set to the GitHub noreply address for this repo only** (`87403433+AndyChoi4495@users.noreply.github.com`), so the personal Gmail from the global config doesn't end up in public history. The global git config was left untouched.
 
-## 2026-11-09 — git 설정
+## 2026-11-09 — Bilingual Docs
 
-- **계획 문서(plan, checklist, context-notes, CLAUDE.md)는 공개한다.** 사용자가 결정했다. 설계 과정 자체가 포트폴리오가 된다.
-- **커밋 이메일은 이 저장소에만 GitHub noreply 주소로 설정했다** (`87403433+AndyChoi4495@users.noreply.github.com`). 전역 설정의 개인 Gmail이 공개 히스토리에 남지 않게 하려는 것이다. 전역 git 설정은 건드리지 않았다.
+- **Every document pushed to GitHub has both an English and a Korean version.** The user's request.
+- **Separate files rather than both languages in one file:** `X.md` is English and `X.ko.md` is Korean, with a language switch link at the top of each. This is the common GitHub convention, and each file stays readable.
+- **English is the default (`X.md`).** The portfolio audience is mainly Canadian recruiters, and GitHub renders `README.md` by default.
+- **Code:** identifiers and comments are in English; only the first-line role comment is two lines, Korean + English (CLAUDE.md §6).
+- **`CLAUDE.md` stays English as the source of truth that Claude Code loads; `CLAUDE.ko.md` is a translation for people.**
+
+## Open Questions
+
+- Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.
+- Whether to narrow Canada down to specific cities (Toronto, Vancouver, etc.). Currently all of Canada.
