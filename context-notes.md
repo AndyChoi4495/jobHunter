@@ -104,7 +104,7 @@ Decisions:
 
 - **Everything the user reads is ordered by posted date, newest first, undated last.** Applying right after a posting goes up is an advantage. The board already did this; the Discord summary now does too, so the "+N more" truncation cuts the oldest postings, never the newest.
 - **Notion view sorting is manual:** the API version we use can't set view sorts, so the DB view is sorted by `Posted` descending in the Notion UI.
-- **`posted` is still a date, so same-day postings aren't ordered by time.** Simplify's `date_posted` has the exact time, but canada-internship only gives a date.
+- **`posted` is still a date, so same-day postings aren't ordered by time.** Simplify's `date_posted` has the exact time, but canada-internship only gives a date. The user decided day-level ordering is enough, so `posted` stays a date.
 
 ## Open Questions
 
