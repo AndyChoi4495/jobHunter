@@ -1,10 +1,11 @@
 # 체크리스트
 
 ## 0. 준비
-- [ ] git 저장소 초기화, GitHub **공개** 저장소 생성
+- [x] git 저장소 초기화 (noreply 이메일 설정)
+- [ ] GitHub **공개** 저장소 생성, 첫 푸시
 - [ ] 저장소 설정: 외부 기여자 PR의 Actions 실행에 승인 필요, Pages 소스를 GitHub Actions로 설정
 - [ ] Python 프로젝트 셋업 (pyproject.toml, 테스트 도구)
-- [ ] `.gitignore`에 `.env` 추가
+- [x] `.gitignore`에 `.env` 추가
 - [ ] Notion 통합(Integration) 생성, 토큰 발급
 - [ ] 캐나다용 Notion DB 생성 (plan.md 속성 표 기준), 통합에 DB 공유
 - [ ] Discord 캐나다 알림 채널에 웹훅 생성
