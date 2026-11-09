@@ -7,7 +7,8 @@ sources:
   canada_internship:
     enabled: true            # applies to the Canada region only
   jsearch:
-    enabled: false
+    enabled: true            # Notion + Discord only, never on the public board
+    run_hour: 12             # weekdays at this hour, Toronto time (free quota: 200/month)
 
 tracks:
   intern:

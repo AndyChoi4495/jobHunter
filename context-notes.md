@@ -123,6 +123,16 @@ Decisions:
 - **Known trade-off:** `fpga` also drops "FPGA Software Tool Developer Co-op". Accepted for simplicity.
 - **Result on 2026-11-09 data:** 838 → 650 Canada postings. Pages already in Notion aren't removed by this; the board rebuilds every run, so it updates on its own.
 
+## 2026-11-09 — JSearch
+
+- **Why JSearch instead of LinkedIn / Indeed directly:** neither has a public job-search API, and scraping breaks their terms, gets blocked on Actions runners, and looks bad in a public portfolio repo.
+- **Test calls before building (8 requests):** the old `/search` endpoint is gone (404, not counted); `/search-v2` returns `data.jobs`. `employment_types=INTERN` was unreliable (1 result, labeled FULLTIME), so it isn't used. Across 6 queries over 3 days, results were thin (1–10 per query), mostly via re-posting sites (BeBee, Jobrapido, Jooble, JobLeads; one LinkedIn, one Indeed), with no direct employer links. About 6 genuinely entry-level postings were new compared with Simplify / canada-internship. The user chose a 2-week trial anyway: low cost, and seeing new-grad postings early matters.
+- **Schedule:** the free quota is 200/month, so JSearch runs once per weekday at 12:xx Toronto time (the user's choice), with all 7 queries and `date_posted=3days` so Monday covers the weekend: at most 161/month. Cron is UTC without DST, so both 16:05 and 17:05 UTC are scheduled and `should_run` picks the one in the Toronto noon hour. The other noon run just collects the free sources again.
+- **Never on the public board** (the user's choice): it's paid third-party data that may not be republishable. `board.py` drops JSearch postings itself, so no caller can leak them.
+- **Failures only warn:** a quota 429 or API change sends a Discord warning but doesn't fail the run, since JSearch can't affect the board. Missing `JSEARCH_API_KEY` is treated the same way.
+- **Never in `DRY_RUN`**, so local testing doesn't spend quota.
+- **JSearch postings go last before dedupe**, so when a posting is also in Simplify or canada-internship, their (better, direct) link wins.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.

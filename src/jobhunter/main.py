@@ -5,6 +5,7 @@ from __future__ import annotations
 import logging
 import os
 import sys
+from datetime import datetime, timezone
 from typing import Dict, List
 
 from jobhunter import board, notify_discord, notion_store
@@ -12,7 +13,7 @@ from jobhunter.config import load_config
 from jobhunter.dedupe import dedupe
 from jobhunter.filter import filter_jobs
 from jobhunter.models import Job
-from jobhunter.sources import canada_internship, simplify
+from jobhunter.sources import canada_internship, jsearch, simplify
 
 log = logging.getLogger("jobhunter")
 
@@ -52,9 +53,6 @@ def main() -> int:
             except Exception:
                 log.exception("Could not send Discord warning")
 
-    if cfg.sources.jsearch.enabled:
-        log.info("JSearch is enabled in config but not implemented; ignoring.")
-
     # Fetch each source once; regions share the results.
     raw: Dict[str, List[Job]] = {}
     fetchers = []
@@ -76,6 +74,23 @@ def main() -> int:
         log.info("%s: %d rows", name, len(raw[name]))
         if not raw[name]:
             warn("Source %s returned 0 rows; the format may have changed." % name)
+
+    # JSearch is optional and quota-limited: run only at its scheduled hour, never in a
+    # dry run, and treat failures as warnings (its postings never reach the board anyway).
+    js = cfg.sources.jsearch
+    if js.enabled and not dry_run and jsearch.should_run(datetime.now(timezone.utc), js.run_hour):
+        key = os.environ.get("JSEARCH_API_KEY", "")
+        rows: List[Job] = []
+        try:
+            if not key:
+                raise RuntimeError("JSEARCH_API_KEY is not set")
+            for country in sorted({r.country for r in regions}):
+                rows.extend(jsearch.fetch(cfg.tracks, country, key))
+            log.info("jsearch: %d rows", len(rows))
+        except Exception:
+            log.exception("Fetching jsearch failed")
+            warn("Source jsearch failed (quota or API change?); continuing without it.")
+        raw["jsearch"] = rows  # last, so dedupe keeps the other sources' copies
 
     all_jobs = [j for rows in raw.values() for j in rows]
     published: List[Job] = []

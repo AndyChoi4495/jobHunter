@@ -27,6 +27,7 @@ class CanadaInternshipConfig:
 @dataclass(frozen=True)
 class JSearchConfig:
     enabled: bool
+    run_hour: int
 
 
 @dataclass(frozen=True)
@@ -79,7 +80,10 @@ def load_config(path: Union[str, Path] = "config.yaml") -> Config:
             canada_internship=CanadaInternshipConfig(
                 enabled=bool(src["canada_internship"]["enabled"])
             ),
-            jsearch=JSearchConfig(enabled=bool(src["jsearch"]["enabled"])),
+            jsearch=JSearchConfig(
+                enabled=bool(src["jsearch"]["enabled"]),
+                run_hour=int(src["jsearch"]["run_hour"]),
+            ),
         ),
         tracks={
             Track(name): TrackConfig(queries=list(t["queries"]))

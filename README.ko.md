@@ -55,6 +55,7 @@ flowchart LR
 | [SimplifyJobs/New-Grad-Positions](https://github.com/SimplifyJobs/New-Grad-Positions) | 신입 | JSON |
 | [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships) | 인턴 | JSON |
 | [Francklin9999/canada-internship](https://github.com/Francklin9999/canada-internship) | 인턴, 신입 (캐나다) | 마크다운 표 |
+| [JSearch](https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch) (평일 정오) | 검색어로 구분 | REST API (Notion + Discord만, 공개 보드에는 안 올림) |
 
 공고 목록의 공은 이 저장소들을 관리하는 분들에게 있다. 보드는 걸러낸 일부만 보여주고, 모든 공고를 원래 지원 페이지로 연결한다.
 

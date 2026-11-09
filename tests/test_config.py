@@ -17,7 +17,7 @@ def test_sources():
     assert cfg.sources.simplify.new_grad_repo == "SimplifyJobs/New-Grad-Positions"
     assert "Software" in cfg.sources.simplify.categories
     assert cfg.sources.canada_internship.enabled
-    assert not cfg.sources.jsearch.enabled
+    assert cfg.sources.jsearch.enabled and cfg.sources.jsearch.run_hour == 12
 
 
 def test_tracks_and_exclusions():

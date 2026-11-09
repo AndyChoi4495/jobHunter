@@ -81,7 +81,8 @@ sources:
   canada_internship:
     enabled: true            # applies to the Canada region only
   jsearch:
-    enabled: false
+    enabled: true            # Notion + Discord only, never on the public board
+    run_hour: 12             # weekdays at this hour, Toronto time
 
 tracks:
   intern:
@@ -117,7 +118,7 @@ regions:
 
 - Secrets never go in config; only environment variable names do.
 - The query lists are drafts, to be tuned against real results.
-- JSearch parameter names for country, date posted, employment type (INTERN), and experience requirements will be confirmed against the API docs at implementation time.
+- JSearch uses the `/search-v2` endpoint with `query`, `country`, and `date_posted=3days` only. The `employment_types=INTERN` filter proved unreliable in testing, so the role and exclusion filters do that job.
 
 ### Sources
 
@@ -127,7 +128,7 @@ regions:
 | [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships) | Same JSON | Worldwide | Intern | Adds a `terms` field. Repo name includes the year, so it changes every season |
 | [Francklin9999/canada-internship](https://github.com/Francklin9999/canada-internship) `INTERNSHIPS.md` | Markdown table | Canada only | Intern | Only the "Tech internships" section. Links are mostly LinkedIn |
 | Same repo, `NEW_GRAD.md` | Markdown table | Canada only | New Grad | Only the "Tech new-grad roles" section |
-| JSearch API (optional) | REST JSON | Per country | By query | Off by default. Fills gaps the lists above miss |
+| JSearch API (optional) | REST JSON | Per country | By query | Weekdays at noon Toronto time. Notion + Discord only, never on the public board. Fills gaps the lists above miss |
 
 - Everything is fetched from `raw.githubusercontent.com`. No API keys or quotas.
 - From the Simplify lists, keep only `category` Software / AI/ML/Data, and determine the country from `locations`.
@@ -180,7 +181,7 @@ jobHunter/
 
 ### Secrets (GitHub Secrets)
 
-- `JSEARCH_API_KEY` (RapidAPI, only if JSearch is enabled)
+- `JSEARCH_API_KEY` (RapidAPI)
 - `NOTION_TOKEN`
 - `NOTION_DB_CANADA`, `DISCORD_WEBHOOK_CANADA`
 - `NOTION_DB_USA`, `DISCORD_WEBHOOK_USA` (when the USA is enabled)
@@ -219,7 +220,7 @@ Keep a base resume; when a posting is selected, generate a tailored version with
 - **Redistributing data on the public board:** the source repos have no license. Credit sources, link to the originals, and show only a filtered subset rather than republishing the raw files. Keep a per-source flag to drop a source from the board if its maintainers object.
 - **Dependence on GitHub lists:** community-maintained repos may stop updating or change format; canada-internship in particular is a small personal repo. Log per-source counts to spot problems quickly.
 - **Intern repo season rollover:** Simplify creates a new intern repo per year (e.g. `Summer2027`). The repo name in config must be updated each season.
-- **JSearch free quota** (if enabled): monthly requests are capped. Requests ≈ `queries × active regions × runs per day × 30`. Canada alone with 7 queries × 2 runs/day is about 420/month. Size queries and schedule to the quota, and remember enabling the USA doubles it.
+- **JSearch free quota:** 200 requests/month. Requests ≈ `queries × active regions × weekdays`. Canada with 7 queries once per weekday is at most 161/month. Enabling the USA would double it and exceed the quota, so cut queries first.
 - **Posting quality:** aggregator APIs can miss postings or lag behind the originals.
 - **Notion API rate limit:** about 3 requests/second, so space out bulk inserts.
 - **GitHub Actions cron:** runs in UTC and can be delayed by several minutes.

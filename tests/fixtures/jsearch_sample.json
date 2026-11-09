@@ -1,0 +1,102 @@
+{
+ "status": "OK",
+ "parameters": {
+  "query": "new grad software engineer",
+  "num_pages": 1,
+  "date_posted": "3days",
+  "country": "ca",
+  "language": "en"
+ },
+ "data": {
+  "jobs": [
+   {
+    "job_id": "b1lKSGx6eW1GXzltY2VGdUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxXVGxEUjB0aE9VSk5jM0E1VEVwbVRVNDNVa2htT1UxRVpqWkRiR3RGYmxOelVsVXhZMFJVWjFFdGFIbDJVRWR3WlV0b05tZGZjV3h6V2xOQ1gwZHFkV0pFUVVkNlJXWkdXa1pNWTJ0WFVsTkVTV2cwYjFWRU5YZHNVVlE1VkZWVWRrWmpNMmhOYlVKM1ExaFBWV1UwYlZndFIxQnFWWFJaTnpjek9HeEtURFZ2V0ZKTmRrSVNGMFZFUkhsaGRsOHpUblpFWW5ObFRWQm9PRE5vZDBGekdpSkJTRTR3UlRkSVlrcG9kbFJRT0ZSeU4xUm5jVlo0YlV4dFRXeHVjSFZzTm10QjpkZDUyODc1MA",
+    "employer_name": "Konrad",
+    "job_title": "Software Developer (Entry Level)",
+    "job_apply_link": "https://bebee.com/ca/jobs/software-developer-entry-level-konrad-north-census-division-sk--jooble--5326763510463623280",
+    "job_location": "Saskatchewan",
+    "job_city": null,
+    "job_state": "Saskatchewan",
+    "job_country": "CA",
+    "job_is_remote": false,
+    "job_posted_at_timestamp": 1794178800,
+    "job_posted_at_datetime_utc": "2026-11-08T23:00:00.000Z",
+    "job_publisher": "BeBee",
+    "job_employment_types": [
+     "FULLTIME"
+    ]
+   },
+   {
+    "job_id": "a0prdmJyV0RCWUlod1ktMUFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZamxqUkZKcE5VOXZlRUpqVVRGdFFUbHBRalJvUnpoaFFYbDRXR3cyYW05aVdqUktlRUZPWTFCcmVYUldXbHB2TnpKR1VHWTFZbkZEVkRRNFNuVnBiSEZ3YlRkTVlVaFBNM1JvWW1Vd00wbEVWMk51WjFkZmNGZDZZMEZTYlc1eGRVTmxMVzFCWWtVMWJUYzRSRFl6VEU4eVpUbFdXbXhLWDNscFpreHpiRkkzZUhCcVoyUVNGMFZFUkhsaGRsOHpUblpFWW5ObFRWQm9PRE5vZDBGekdpSkJTRTR3UlRkSFlscEZRazB4VGtGSFRtNHhVVUZPYVRCMFZUTk9RbTFwVTA5Qjo4YzExZDdjNw",
+    "employer_name": "Ciena",
+    "job_title": "Software Design/Engineer New Grad",
+    "job_apply_link": "https://bebee.com/ca/jobs/software-design-engineer-new-grad-ciena-north-census-division-sk--jooble--2703080157634855899",
+    "job_location": "Saskatchewan",
+    "job_city": null,
+    "job_state": "Saskatchewan",
+    "job_country": "CA",
+    "job_is_remote": false,
+    "job_posted_at_timestamp": 1794178800,
+    "job_posted_at_datetime_utc": "2026-11-08T23:00:00.000Z",
+    "job_publisher": "BeBee",
+    "job_employment_types": [
+     "INTERN"
+    ]
+   },
+   {
+    "job_id": "TDE2cFBORzBVWXJNWHE2UEFBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZa2w2YjJONU1rcDVaR3gxVEdvMU5GbElaVmxmYlZRd1dtTnZXVGhuYTJrMlZ6QmtiSG94TVMxUGR6WXpkWHAxY0c1RU16Qk9aelZ2ZWpKVlZXeHlSM1I2YUVaTGRuUlNkalZuZFRCcGNEVkhMVGREYUZSVVEzWjBZM2huZGxCZmFuWnZlbWxhWVRsU1dHWk5aM1Z3WjJWU01HWlhORmw2YUZaemRVZDZTVk42YlVKM1ZWVVNGMFZFUkhsaGRsOHpUblpFWW5ObFRWQm9PRE5vZDBGekdpSkJTRTR3UlRkSGIwVmxiakl0WjFOcFUweEhkV3hCVURWVlltWm1aRWxKVTFSQjo2YWFhZDQ5ZA",
+    "employer_name": "Sardine.ai",
+    "job_title": "Senior Frontend Software Engineer - Fully Remote Job",
+    "job_apply_link": "https://ca.jooble.org/rjdp/1359822620146660132",
+    "job_location": "Canada",
+    "job_city": null,
+    "job_state": null,
+    "job_country": "CA",
+    "job_is_remote": false,
+    "job_posted_at_timestamp": 1794009600,
+    "job_posted_at_datetime_utc": "2026-11-07T00:00:00.000Z",
+    "job_publisher": "Jooble",
+    "job_employment_types": [
+     "FULLTIME"
+    ]
+   },
+   {
+    "job_id": "ZEhURWVVLXE3MkFGTUFoY0FBQUFBQT09OkVzd0JDb3dCUVVSRVlsZGxZakJ1WWs1MGRURlVTbTFKT1hKamQxSmlRVlU0VW1aMGJWOW9jMFJyYUhseGNqUklZV3BYVWtSNk1rczVSelowYzNKd2QzVnJkSEJ2VFhvd05WRkpXbEIyUWtSdWRXVjRjR2RFYmxac1RWRm1hM1kzTFVGbUxXSlFWRWhYUmpWR2ExWlFTRjlzYVZSamRGSlBMVXBxYWtwdFowZG5RWEoyVDJGaFEwb3hUUzFaUmpsNlJEVVNGMFZFUkhsaGRsOHpUblpFWW5ObFRWQm9PRE5vZDBGekdpSkJTRTR3UlRkSFJHczNTVEpKWkRKT04yMVlVR0p4V1RCTk56TkRURlp4TVZaQjo0NzkwMDJjYw",
+    "employer_name": "Creditbook",
+    "job_title": "C# .NET Software Engineer FS (Contract – Remote, Canada)",
+    "job_apply_link": "https://emplois.ca.indeed.com/viewjob?jk=125c4420c35834b7",
+    "job_location": "Canada",
+    "job_city": null,
+    "job_state": null,
+    "job_country": "CA",
+    "job_is_remote": false,
+    "job_posted_at_timestamp": 1793923200,
+    "job_posted_at_datetime_utc": "2026-11-06T00:00:00.000Z",
+    "job_publisher": "Indeed",
+    "job_employment_types": [
+     "FULLTIME",
+     "PARTTIME",
+     "CONTRACTOR"
+    ]
+   },
+   {
+    "job_id": "no-link",
+    "employer_name": "Konrad",
+    "job_title": "Missing Link Developer",
+    "job_apply_link": null,
+    "job_location": "Saskatchewan",
+    "job_city": null,
+    "job_state": "Saskatchewan",
+    "job_country": "CA",
+    "job_is_remote": false,
+    "job_posted_at_timestamp": 1794178800,
+    "job_posted_at_datetime_utc": "2026-11-08T23:00:00.000Z",
+    "job_publisher": "BeBee",
+    "job_employment_types": [
+     "FULLTIME"
+    ]
+   }
+  ],
+  "cursor": null
+ }
+}

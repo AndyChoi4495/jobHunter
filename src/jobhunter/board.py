@@ -32,6 +32,8 @@ def _public(job: Job) -> Dict[str, object]:
 
 
 def build_board(jobs: List[Job], out_path: Union[str, Path] = "site/jobs.json") -> None:
+    # JSearch is paid third-party data, so it is never republished.
+    jobs = [j for j in jobs if j.source is not Source.JSEARCH]
     # Newest posted first; undated postings go last.
     ordered = sorted(jobs, key=lambda j: j.posted.toordinal() if j.posted else 0, reverse=True)
     data = {

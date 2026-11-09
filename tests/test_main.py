@@ -2,6 +2,8 @@
 # Tests for the main pipeline flow with all external calls monkeypatched
 from __future__ import annotations
 
+from dataclasses import replace
+
 import pytest
 
 from jobhunter import main as m
@@ -84,3 +86,46 @@ def test_dry_run_skips_io(env, monkeypatch, capsys):
     assert env["added"] == [] and env["summary"] == []
     assert len(env["board"]) == 1
     assert "[dry-run] canada: 3 postings" in capsys.readouterr().out
+
+
+def jsearch_on(monkeypatch, fetch):
+    monkeypatch.setenv("JSEARCH_API_KEY", "key")
+    orig = m.load_config
+    monkeypatch.setattr(m, "load_config", lambda: _with_jsearch(orig()))
+    monkeypatch.setattr(m.jsearch, "should_run", lambda now, hour: True)
+    monkeypatch.setattr(m.jsearch, "fetch", fetch)
+
+
+def _with_jsearch(cfg):
+    sources = replace(cfg.sources, jsearch=replace(cfg.sources.jsearch, enabled=True))
+    return replace(cfg, sources=sources)
+
+
+def test_jsearch_added_after_other_sources(env, monkeypatch):
+    js = replace_source(job(5), Source.JSEARCH)
+    jsearch_on(monkeypatch, lambda tracks, country, key: [js])
+    assert m.main() == 0
+    assert env["added"] == [("dbca", ["id2", "id4", "id5"])]
+
+
+def test_jsearch_failure_only_warns(env, monkeypatch):
+    def boom(tracks, country, key):
+        raise RuntimeError("429")
+
+    jsearch_on(monkeypatch, boom)
+    assert m.main() == 0
+    assert any("jsearch" in w for w in env["warn"])
+    assert env["added"] == [("dbca", ["id2", "id4"])]
+
+
+def test_jsearch_skipped_in_dry_run(env, monkeypatch):
+    def must_not_run(*a):
+        raise AssertionError("JSearch must not spend quota in a dry run")
+
+    jsearch_on(monkeypatch, must_not_run)
+    monkeypatch.setenv("DRY_RUN", "1")
+    assert m.main() == 0
+
+
+def replace_source(j, source):
+    return replace(j, source=source)

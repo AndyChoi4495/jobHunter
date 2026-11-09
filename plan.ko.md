@@ -81,7 +81,8 @@ sources:
   canada_internship:
     enabled: true            # 캐나다 지역에만 적용
   jsearch:
-    enabled: false
+    enabled: true            # Notion + Discord만, 공개 보드에는 절대 안 올림
+    run_hour: 12             # 평일 이 시각(토론토 시간)에 실행
 
 tracks:
   intern:
@@ -117,7 +118,7 @@ regions:
 
 - 비밀값은 config에 직접 쓰지 않는다. 환경변수 이름만 적는다.
 - 검색어 목록은 초안이다. 실제 결과를 보고 조정한다.
-- JSearch의 국가, 게시 기간, 고용 형태(INTERN), 경력 요건 파라미터 이름은 구현할 때 API 문서로 확인한다.
+- JSearch는 `/search-v2` 엔드포인트에 `query`, `country`, `date_posted=3days`만 쓴다. `employment_types=INTERN` 필터는 테스트해 보니 믿을 수 없어서, 직무 키워드와 제외어 필터가 그 역할을 한다.
 
 
 ### 수집 출처
@@ -128,7 +129,7 @@ regions:
 | [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships) | 동일 JSON | 전 세계 | 인턴 | `terms` 필드 추가. 저장소 이름에 연도가 들어 있어 매년 바뀜 |
 | [Francklin9999/canada-internship](https://github.com/Francklin9999/canada-internship) `INTERNSHIPS.md` | 마크다운 표 | 캐나다만 | 인턴 | "Tech internships" 섹션만 사용. 링크 대부분 LinkedIn |
 | 같은 저장소 `NEW_GRAD.md` | 마크다운 표 | 캐나다만 | 신입 | "Tech new-grad roles" 섹션만 사용 |
-| JSearch API (선택) | REST JSON | 국가 지정 | 검색어로 구분 | 기본 비활성. 위 목록이 놓치는 공고 보완용 |
+| JSearch API (선택) | REST JSON | 국가 지정 | 검색어로 구분 | 평일 토론토 시간 정오에 실행. Notion + Discord만, 공개 보드에는 안 올림. 위 목록이 놓치는 공고 보완용 |
 
 - 모두 `raw.githubusercontent.com`에서 받는다. API 키나 할당량이 필요 없다.
 - Simplify 목록은 `category`가 Software, AI/ML/Data인 공고만 남기고, `locations`로 국가를 판별한다.
@@ -181,7 +182,7 @@ jobHunter/
 
 ### 비밀값 (GitHub Secrets)
 
-- `JSEARCH_API_KEY` (RapidAPI, JSearch를 켤 때만)
+- `JSEARCH_API_KEY` (RapidAPI)
 - `NOTION_TOKEN`
 - `NOTION_DB_CANADA`, `DISCORD_WEBHOOK_CANADA`
 - `NOTION_DB_USA`, `DISCORD_WEBHOOK_USA` (미국 활성화 시)
@@ -220,7 +221,7 @@ Notion `상태` 속성으로 지원 단계를 관리한다. 마감일과 후속 
 - **공개 보드의 데이터 재배포**: 소스 저장소에 라이선스가 없다. 출처를 표기하고 원문 링크로 연결하며, 원본 파일을 통째로 다시 배포하지 않고 걸러낸 일부만 보여준다. 출처 측에서 문제를 제기하면 해당 출처를 보드에서 빼는 플래그를 둔다.
 - **GitHub 목록 의존성**: 커뮤니티가 관리하는 저장소라 갱신이 멈추거나 형식이 바뀔 수 있다. 특히 canada-internship은 규모가 작은 개인 저장소다. 출처별 수집 건수를 로그로 남겨 이상을 빨리 알아챈다.
 - **인턴 저장소 시즌 교체**: Simplify 인턴 저장소는 `Summer2027`처럼 연도별로 새로 만들어진다. 시즌이 바뀌면 config의 저장소 이름을 갱신해야 한다.
-- **JSearch 무료 할당량** (켤 경우): 월 요청 수가 제한되어 있다. 요청 수는 대략 `검색어 수 × 활성 지역 수 × 하루 실행 횟수 × 30`이다. 캐나다만 켜도 검색어 7개 × 하루 2회면 월 약 420회다. 한도를 확인한 뒤 검색어 수와 실행 주기를 맞추고, 미국을 켜면 두 배가 된다는 점을 고려한다.
+- **JSearch 무료 할당량:** 월 200회다. 요청 수는 대략 `검색어 수 × 활성 지역 수 × 평일 수`다. 캐나다만, 검색어 7개를 평일 하루 한 번 돌리면 월 최대 161회다. 미국을 켜면 두 배가 되어 한도를 넘으므로 먼저 검색어를 줄인다.
 - **공고 품질**: 집계 API가 원본 공고를 누락하거나 늦게 반영할 수 있다.
 - **Notion API 속도 제한**: 초당 약 3회 요청으로 제한되므로 대량 추가 시 간격을 둔다.
 - **GitHub Actions cron**: UTC 기준이고 실행이 몇 분 지연될 수 있다.

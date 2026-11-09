@@ -8,7 +8,7 @@
 
 ## 프로젝트 현황
 
-1단계 진행 중이다(스캐폴드 완료). jobHunter는 개인용 구직 자동화 도구다. GitHub Actions cron이 Python 스크립트를 실행해 커뮤니티 공고 목록 GitHub 저장소(SimplifyJobs JSON, Francklin9999/canada-internship 마크다운)에서 공고를 수집한다. JSearch API는 기본으로 꺼 둔 선택 출처다. 수집한 공고는 Notion 데이터베이스에 저장하고(Notion이 UI 역할도 한다), Discord 웹훅으로 알림을 보낸다. 저장소는 포트폴리오로 공개하며, 읽기 전용 정적 공고 보드(`site/`, GitHub Pages)는 수집한 공고만으로 만든다. Notion 데이터(지원 상태, 메모)가 공개되는 어떤 곳에도 흘러가면 안 된다. 구조는 `plan.md`, 진행 상황은 `checklist.md`, 결정 이유는 `context-notes.md`에 있다(각각 한국어 `.ko.md` 쌍이 있다. 12절 참고). 
+1단계 진행 중이다(스캐폴드 완료). jobHunter는 개인용 구직 자동화 도구다. GitHub Actions cron이 Python 스크립트를 실행해 커뮤니티 공고 목록 GitHub 저장소(SimplifyJobs JSON, Francklin9999/canada-internship 마크다운)에서 공고를 수집한다. JSearch API는 평일 토론토 시간 정오에 도는 선택 출처이고, 공개되는 곳에는 절대 올리지 않는다. 수집한 공고는 Notion 데이터베이스에 저장하고(Notion이 UI 역할도 한다), Discord 웹훅으로 알림을 보낸다. 저장소는 포트폴리오로 공개하며, 읽기 전용 정적 공고 보드(`site/`, GitHub Pages)는 수집한 공고만으로 만든다. Notion 데이터(지원 상태, 메모)가 공개되는 어떤 곳에도 흘러가면 안 된다. 구조는 `plan.md`, 진행 상황은 `checklist.md`, 결정 이유는 `context-notes.md`에 있다(각각 한국어 `.ko.md` 쌍이 있다. 12절 참고). 
 
 ## 명령
 

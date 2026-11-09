@@ -55,6 +55,7 @@ The board is built **only from collected postings**. It never reads Notion, so a
 | [SimplifyJobs/New-Grad-Positions](https://github.com/SimplifyJobs/New-Grad-Positions) | New Grad | JSON |
 | [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships) | Intern | JSON |
 | [Francklin9999/canada-internship](https://github.com/Francklin9999/canada-internship) | Intern, New Grad (Canada) | Markdown tables |
+| [JSearch](https://rapidapi.com/letscrape-6bRBa3QguO5/api/jsearch) (weekdays at noon) | By search query | REST API (Notion + Discord only, not on the public board) |
 
 All credit for the listings goes to the maintainers of these repos. The board shows a filtered subset and links every posting to its original application page.
 

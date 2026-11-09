@@ -44,7 +44,7 @@ def test_labels_and_iso_dates(tmp_path):
     build_board(
         [
             _job("A", date(2026, 11, 1), track=Track.NEW_GRAD, source=Source.CANADA_INTERNSHIP),
-            _job("B", None, source=Source.JSEARCH),
+            _job("B", None, source=Source.SIMPLIFY),
         ],
         out,
     )
@@ -53,7 +53,7 @@ def test_labels_and_iso_dates(tmp_path):
     assert jobs["A"]["source"] == "CanadaInternship"
     assert jobs["A"]["posted"] == "2026-11-01"
     assert jobs["B"]["track"] == "Intern"
-    assert jobs["B"]["source"] == "JSearch"
+    assert jobs["B"]["source"] == "Simplify"
     assert jobs["B"]["posted"] is None
 
 
@@ -71,3 +71,12 @@ def test_empty_list(tmp_path):
     out = tmp_path / "jobs.json"
     build_board([], out)
     assert json.loads(out.read_text())["jobs"] == []
+
+
+def test_jsearch_postings_are_never_published(tmp_path):
+    out = tmp_path / "jobs.json"
+    build_board(
+        [_job("Kept", date(2026, 1, 1)), _job("Dropped", date(2026, 1, 2), source=Source.JSEARCH)],
+        out,
+    )
+    assert [j["title"] for j in json.loads(out.read_text())["jobs"]] == ["Kept"]

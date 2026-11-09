@@ -37,8 +37,10 @@
 - [x] README: problem, architecture diagram, board link, screenshots, how to run, source attribution, CI badge
 
 ## JSearch Extra Source (optional)
-- [ ] Subscribe to JSearch on RapidAPI, get API key, check free quota
-- [ ] JSearch collector + tests, enable in config
+- [x] Subscribe to JSearch on RapidAPI, get API key, check free quota (200/month)
+- [x] JSearch collector + tests, enable in config
+- [ ] Register the `JSEARCH_API_KEY` Secret on GitHub
+- [ ] Review after 2 weeks (around 2026-11-23): how many JSearch postings were worth applying to? Keep or drop
 
 ## USA Expansion (optional)
 - [ ] Create US Notion DB and Discord webhook
