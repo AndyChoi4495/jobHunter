@@ -59,6 +59,13 @@ Decisions:
 - **Code:** identifiers and comments are in English; only the first-line role comment is two lines, Korean + English (CLAUDE.md §6).
 - **`CLAUDE.md` stays English as the source of truth that Claude Code loads; `CLAUDE.ko.md` is a translation for people.**
 
+## 2026-11-09 — Agent Team Setup
+
+- **Agent teams enabled per project** via `.claude/settings.json` (`CLAUDE_CODE_EXPERIMENTAL_AGENT_TEAMS=1`). Teams are set up only at session start, so Claude Code must be restarted.
+- **Split panes via tmux.** The user is on Apple Terminal, which has no native split-pane support for teams, so tmux 3.8 was installed with Homebrew and `teammateMode: "tmux"` was set in the user settings. `~/.tmux.conf` enables the mouse, highlights the active pane border in green, shows each pane's number and title on its top border, and uses a green status bar showing the active pane.
+- **Plan approval is message-based.** Per the docs, when a teammate spawned in plan mode finishes planning, Claude Code approves the plan automatically without the lead reviewing it. To get a real review, teammates must send their plan to the lead and wait for an explicit approval (CLAUDE.md §11).
+- **Four Sonnet teammates with disjoint file ownership** (see plan.md "Agent Team"). Docs and commits stay with the lead to avoid conflicts and keep the bilingual pairs in sync.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.

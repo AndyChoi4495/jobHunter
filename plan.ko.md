@@ -189,6 +189,21 @@ jobHunter/
 
 로컬에서는 `.env`로 관리하고 git에 올리지 않는다.
 
+## 에이전트 팀 (1단계 구현)
+
+리드(메인 세션)가 조율한다. 팀원은 모두 **Sonnet**을 쓰고, 무엇이든 바꾸기 전에 계획 승인을 받아야 한다(CLAUDE.md 11절).
+
+| 팀원 | 담당 (이 파일만 수정) | 시작 시점 |
+|---|---|---|
+| `scaffold` | `pyproject.toml`, `config.yaml`, `src/jobhunter/{__init__,config,models}.py`, `tests/test_config.py`, `.github/workflows/ci.yml` | 가장 먼저 |
+| `sources` | `src/jobhunter/sources/{simplify,canada_internship}.py`, `filter.py`, `dedupe.py`, 해당 테스트와 `tests/fixtures/` | scaffold 이후 |
+| `integrations` | `src/jobhunter/{notion_store,notify_discord,main}.py`, 해당 테스트, `.github/workflows/collect.yml` | scaffold 이후 |
+| `board` | `src/jobhunter/board.py`, `site/`, 해당 테스트 | scaffold 이후 |
+
+- `plan*.md`, `checklist*.md`, `context-notes*.md`, `CLAUDE*.md` 수정과 커밋은 리드만 한다.
+- `scaffold`가 `Job` 모델과 config 형식을 먼저 확정해서, 나머지 셋이 공유 파일을 건드리지 않고 동시에 작업할 수 있게 한다.
+- tmux 분할 화면으로 표시한다. `tmux`를 먼저 실행하고 그 안에서 `claude`를 실행한다(사용자 설정의 `teammateMode: "tmux"`).
+
 ## 단계
 
 ### 1단계 — MVP: 수집 + 알림

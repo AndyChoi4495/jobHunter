@@ -188,6 +188,21 @@ jobHunter/
 
 Locally these live in `.env`, which is never committed.
 
+## Agent Team (Phase 1 build)
+
+The lead (main session) coordinates; every teammate runs on **Sonnet** and must get plan approval before changing anything (CLAUDE.md §11).
+
+| Teammate | Owns (only these files) | Starts after |
+|---|---|---|
+| `scaffold` | `pyproject.toml`, `config.yaml`, `src/jobhunter/{__init__,config,models}.py`, `tests/test_config.py`, `.github/workflows/ci.yml` | — (first) |
+| `sources` | `src/jobhunter/sources/{simplify,canada_internship}.py`, `filter.py`, `dedupe.py`, matching tests and `tests/fixtures/` | scaffold |
+| `integrations` | `src/jobhunter/{notion_store,notify_discord,main}.py`, matching tests, `.github/workflows/collect.yml` | scaffold |
+| `board` | `src/jobhunter/board.py`, `site/`, matching tests | scaffold |
+
+- The lead alone edits `plan*.md`, `checklist*.md`, `context-notes*.md`, `CLAUDE*.md`, and makes commits.
+- `scaffold` fixes the `Job` model and config shape first, so the other three can work in parallel without touching shared files.
+- Split-pane display via tmux: start `tmux`, then run `claude` inside it (`teammateMode: "tmux"` in user settings).
+
 ## Phases
 
 ### Phase 1 — MVP: Collection + Alerts

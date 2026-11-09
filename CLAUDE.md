@@ -152,6 +152,8 @@ This is the step LLMs skip most often after "run tests". They guess from error k
 
 - **No broadcast.** Never send a message to all teammates at once. Message only the specific teammate (or the lead) who needs it.
 - **Shut down immediately when done.** Once your assigned task is finished and reported to the lead, end your session. Don't idle, don't pick up unassigned work.
+- **Plan approval before any change.** Before creating, editing, or deleting any file, or running a command that changes state (install, git, etc.), send your plan to the lead with `SendMessage`: files you'll touch, what changes, how you'll verify. Then wait. Start only after the lead replies with approval; if rejected, revise and resend. Read-only exploration needs no approval. (Claude Code's built-in plan-mode approval can auto-approve without the lead reviewing, so this message-based gate is the one that counts.)
+- **Stay in your lane.** Edit only the files assigned to you. If you need a change in someone else's file, ask the lead.
 - **3-iteration limit.** Any loop (plan revision after rejection, fix → test → fix, retrying a failing step) runs at most 3 times. After the 3rd failed attempt, stop and report to the lead what was tried and what's blocking, instead of trying again.
 
 ## 12. Bilingual Docs (English + Korean)
