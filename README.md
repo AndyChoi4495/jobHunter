@@ -38,6 +38,12 @@ flowchart LR
 5. **Notify** Discord with a summary of new postings, newest first.
 6. **Publish** the board to GitHub Pages. If any step fails, the deploy is skipped, so a partial board never replaces the live one.
 
+### Notion as the UI
+
+New postings land in a Notion database, sorted by posted date, where I track what I've applied to.
+
+![Notion database with collected postings, newest first](doc/notion.png)
+
 ### Public vs. private
 
 The board is built **only from collected postings**. It never reads Notion, so application status, notes, and anything else personal can't leak into it. The repo is public; the Notion workspace is not.

@@ -34,7 +34,7 @@
 - [x] `site/` static page: list, track / city / source filters, search, "new" badge, source attribution
 - [x] Add a Pages deploy step to `collect.yml`
 - [x] `ci.yml`: tests + lint
-- [ ] README: problem, architecture diagram, board link, screenshots, how to run, source attribution, CI badge
+- [x] README: problem, architecture diagram, board link, screenshots, how to run, source attribution, CI badge
 
 ## JSearch Extra Source (optional)
 - [ ] Subscribe to JSearch on RapidAPI, get API key, check free quota
