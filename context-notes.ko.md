@@ -67,6 +67,15 @@
 - **계획 승인은 메시지로 받는다.** 문서에 따르면 plan mode로 띄운 팀원이 계획을 마치면, 리드가 검토하지 않아도 Claude Code가 자동으로 승인한다. 실제로 검토하려면 팀원이 리드에게 계획을 보내고 명시적인 승인을 기다려야 한다(CLAUDE.md 11절).
 - **Sonnet 팀원 4명이 서로 겹치지 않는 파일을 맡는다**(plan.ko.md "에이전트 팀" 참고). 문서와 커밋은 리드가 맡아 충돌을 막고 영어·한국어 쌍을 맞춘다.
 
+## 2026-11-09 — 스캐폴드
+
+- **Python 최소 버전은 3.9다**(`requires-python >=3.9`). 로컬 인터프리터가 3.9.6이기 때문이다. 모듈은 `from __future__ import annotations`를 쓰고, 런타임에 평가되는 곳에서는 `X | Y`, `list[str]` 대신 `Optional`, `List`를 쓴다. CI는 3.11에서 돌리고 ruff는 py39 기준으로 검사한다.
+- **`Job`에 Notion 표에 없는 `country` 필드(소문자 ISO 코드)를 넣었다.** Simplify 목록은 여러 나라 공고가 섞여 있어서, 필터가 공고마다 국가를 알아야 지역의 `country`와 맞출 수 있다.
+- **`Track`, `Source`는 값이 config 키와 같은 `str` 열거형이다.** 표시 이름(Intern / New Grad, Simplify / CanadaInternship / JSearch)은 모델이 아니라 Notion과 게시판 코드에서 붙인다.
+- **`posted`, `collected`는 datetime이 아니라 date다.** Notion Date와 게시판은 날짜만 필요하다.
+- **`requests`는 처음부터 의존성에 넣었다.** 수집기, Notion, Discord 모두 HTTP 요청을 보낸다.
+- **로컬 셋업에는 새 pip가 필요하다.** 시스템 pip 21.2.4는 pyproject 기반 editable 설치를 못 하므로 `.venv` 안에서 pip를 먼저 올린다.
+
 ## 열린 질문
 
 - 3단계(이력서 맞춤 작성)를 Claude API로 자동화할지, Muse가 Notion 페이지를 읽고 작성하도록 수동으로 맡길지 정하지 않았다.

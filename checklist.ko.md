@@ -6,7 +6,7 @@
 - [x] git 저장소 초기화 (noreply 이메일 설정)
 - [x] GitHub **공개** 저장소 생성, 첫 푸시
 - [ ] 저장소 설정: 외부 기여자 PR의 Actions 실행에 승인 필요, Pages 소스를 GitHub Actions로 설정
-- [ ] Python 프로젝트 셋업 (pyproject.toml, 테스트 도구)
+- [x] Python 프로젝트 셋업 (pyproject.toml, 테스트 도구)
 - [x] `.gitignore`에 `.env` 추가
 - [ ] Notion 통합(Integration) 생성, 토큰 발급
 - [ ] 캐나다용 Notion DB 생성 (plan.ko.md 속성 표 기준), 통합에 DB 공유
@@ -14,8 +14,8 @@
 - [x] 검색 조건 확정 (인턴·신입 SWE, 캐나다 우선, 원격 무관)
 
 ## 1. MVP — 수집 + 알림
-- [ ] `config.yaml` 스키마와 로더 (tracks, regions, enabled/notify 플래그)
-- [ ] `Job` 모델 정의
+- [x] `config.yaml` 스키마와 로더 (tracks, regions, enabled/notify 플래그)
+- [x] `Job` 모델 정의
 - [ ] Simplify 수집기 (listings.json → `Job`, active·visible·카테고리·국가 판별) + 테스트
 - [ ] canada-internship 수집기 (Tech 섹션 마크다운 표 파싱) + 테스트
 - [ ] 필터 (제외 키워드 등) + 테스트
@@ -33,7 +33,7 @@
 - [ ] `board.py`: publish 지역의 활성 공고 → `site/jobs.json` (개인 필드 없음) + 테스트
 - [ ] `site/` 정적 페이지: 목록, 트랙·도시·출처 필터, 검색, 신규 표시, 출처 표기
 - [ ] `collect.yml`에 Pages 배포 단계 추가
-- [ ] `ci.yml`: 테스트 + 린트
+- [x] `ci.yml`: 테스트 + 린트
 - [ ] README: 문제 정의, 구조도, 보드 링크, 스크린샷, 실행 방법, 출처 표기, CI 배지
 
 ## JSearch 보조 출처 (원할 때)

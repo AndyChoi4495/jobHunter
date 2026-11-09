@@ -1,0 +1,41 @@
+sources:
+  simplify:
+    enabled: true
+    new_grad_repo: SimplifyJobs/New-Grad-Positions
+    intern_repo: SimplifyJobs/Summer2027-Internships   # update when the season rolls over
+    categories: [Software, Software Engineering, AI/ML/Data]
+  canada_internship:
+    enabled: true            # applies to the Canada region only
+  jsearch:
+    enabled: false
+
+tracks:
+  intern:
+    queries:                 # JSearch only
+      - software developer intern
+      - software engineer intern
+      - software developer co-op
+  new_grad:
+    queries:
+      - new grad software engineer
+      - junior software developer
+      - associate software engineer
+      - entry level software developer
+
+exclude_title_keywords: [senior, sr., staff, principal, lead, manager, director]
+
+regions:
+  canada:
+    country: ca
+    enabled: true
+    notify: true
+    publish: true            # include in the public board
+    notion_db_env: NOTION_DB_CANADA
+    discord_webhook_env: DISCORD_WEBHOOK_CANADA
+  usa:
+    country: us
+    enabled: false
+    notify: false
+    publish: false
+    notion_db_env: NOTION_DB_USA
+    discord_webhook_env: DISCORD_WEBHOOK_USA

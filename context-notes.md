@@ -66,6 +66,15 @@ Decisions:
 - **Plan approval is message-based.** Per the docs, when a teammate spawned in plan mode finishes planning, Claude Code approves the plan automatically without the lead reviewing it. To get a real review, teammates must send their plan to the lead and wait for an explicit approval (CLAUDE.md §11).
 - **Four Sonnet teammates with disjoint file ownership** (see plan.md "Agent Team"). Docs and commits stay with the lead to avoid conflicts and keep the bilingual pairs in sync.
 
+## 2026-11-09 — Scaffold
+
+- **Python 3.9 floor** (`requires-python >=3.9`), because the local interpreter is 3.9.6. Modules use `from __future__ import annotations` and `Optional`/`List` instead of `X | Y`/`list[str]` where evaluated at runtime. CI runs on 3.11; ruff targets py39.
+- **`Job` gets a `country` field** (lowercase ISO code) that isn't in the Notion table. Simplify lists span many countries, so the filter needs a per-job country to match a region's `country`.
+- **`Track`/`Source` are `str` enums whose values equal the config keys.** Display labels (Intern / New Grad, Simplify / CanadaInternship / JSearch) are mapped by the Notion and board code, not the model.
+- **Dates, not datetimes**, for `posted` and `collected`: Notion Date and the board only need the day.
+- **`requests` is a dependency from the start**, since sources, Notion, and Discord all make HTTP calls.
+- **Local setup needs a newer pip:** the system pip 21.2.4 can't do editable installs from pyproject, so upgrade pip inside `.venv` first.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.

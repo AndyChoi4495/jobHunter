@@ -6,7 +6,7 @@
 - [x] Initialize git repo (noreply email configured)
 - [x] Create **public** GitHub repo, first push
 - [ ] Repo settings: require approval for Actions on outside-contributor PRs, set Pages source to GitHub Actions
-- [ ] Python project setup (pyproject.toml, test tooling)
+- [x] Python project setup (pyproject.toml, test tooling)
 - [x] Add `.env` to `.gitignore`
 - [ ] Create Notion integration, get token
 - [ ] Create Canada Notion DB (per the property table in plan.md), share it with the integration
@@ -14,8 +14,8 @@
 - [x] Finalize search criteria (intern / new grad SWE, Canada first, remote doesn't matter)
 
 ## 1. MVP — Collection + Alerts
-- [ ] `config.yaml` schema and loader (tracks, regions, enabled/notify flags)
-- [ ] Define the `Job` model
+- [x] `config.yaml` schema and loader (tracks, regions, enabled/notify flags)
+- [x] Define the `Job` model
 - [ ] Simplify collector (listings.json → `Job`; active, visible, category, country detection) + tests
 - [ ] canada-internship collector (parse Markdown tables in the Tech sections) + tests
 - [ ] Filter (excluded keywords, etc.) + tests
@@ -33,7 +33,7 @@
 - [ ] `board.py`: active postings of publish regions → `site/jobs.json` (no personal fields) + tests
 - [ ] `site/` static page: list, track / city / source filters, search, "new" badge, source attribution
 - [ ] Add a Pages deploy step to `collect.yml`
-- [ ] `ci.yml`: tests + lint
+- [x] `ci.yml`: tests + lint
 - [ ] README: problem, architecture diagram, board link, screenshots, how to run, source attribution, CI badge
 
 ## JSearch Extra Source (optional)
