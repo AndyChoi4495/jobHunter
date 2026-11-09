@@ -20,10 +20,10 @@
 - [x] canada-internship 수집기 (Tech 섹션 마크다운 표 파싱) + 테스트
 - [x] 필터 (제외 키워드 등) + 테스트
 - [x] 출처 간 중복 병합 (URL 정규화, 회사+제목) + 테스트
-- [ ] 수집 0건 등 출처 이상 시 Discord 경고
-- [ ] Notion 기존 `Job ID` 조회
-- [ ] Notion 새 공고 추가
-- [ ] Discord 요약 메시지 전송 (새 공고 0건이면 생략)
+- [x] 수집 0건 등 출처 이상 시 Discord 경고
+- [x] Notion 기존 `Job ID` 조회
+- [x] Notion 새 공고 추가
+- [x] Discord 요약 메시지 전송 (새 공고 0건이면 생략)
 - [ ] `main.py`로 전체 흐름 연결, 로컬 실행 확인
 - [ ] GitHub Actions 워크플로 (cron + 수동 실행), Secrets 등록
 - [ ] Actions에서 실제 실행 확인
@@ -32,7 +32,7 @@
 ## 1.5 포트폴리오 — 공개 보드
 - [x] `board.py`: publish 지역의 활성 공고 → `site/jobs.json` (개인 필드 없음) + 테스트
 - [x] `site/` 정적 페이지: 목록, 트랙·도시·출처 필터, 검색, 신규 표시, 출처 표기
-- [ ] `collect.yml`에 Pages 배포 단계 추가
+- [x] `collect.yml`에 Pages 배포 단계 추가
 - [x] `ci.yml`: 테스트 + 린트
 - [ ] README: 문제 정의, 구조도, 보드 링크, 스크린샷, 실행 방법, 출처 표기, CI 배지
 

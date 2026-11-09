@@ -84,6 +84,17 @@ Decisions:
 - **Dedupe merges on equal `job_id` or equal company + title + country**, first occurrence wins (Simplify is passed first since it has a category). canada-internship links are mostly LinkedIn, so cross-source merging relies mainly on company + title.
 - **First real-data dry run (2026-11-09):** Simplify 5361 rows, canada-internship 645 rows → 842 Canada postings after filter and dedupe.
 
+## 2026-11-09 — Notion, Discord, main, collect.yml
+
+- **Notion API via plain `requests`, pinned to `Notion-Version: 2022-06-28`.** Newer versions (2025-09-03+) move databases to "data sources"; Notion says old versions stay supported, and the old `/databases/{id}/query` endpoint is the one we could confirm. Revisit if it's ever deprecated.
+- **Throttle ~0.35 s between Notion requests, retry once on 429** using `Retry-After`.
+- **Each source is fetched once per run, not per region.** A fetch error is logged, counts as 0 rows (Discord warning), and makes `main()` return 1.
+- **The Pages deploy only runs when `main` exits 0**, so a partial board never replaces the live one.
+- **`DRY_RUN=1`** fetches and builds the board but skips all Notion and Discord calls, so it runs with no secrets. Local `.env` isn't auto-loaded (no extra dependency); export vars in the shell.
+- **Cron at 11:17 and 23:17 UTC**, off the hour to avoid Actions congestion.
+- **JSearch isn't implemented yet**; enabling it in config only logs a line.
+- Code-complete with mocked tests; the "local run" and Actions items stay open until a real run against Notion and Discord.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.

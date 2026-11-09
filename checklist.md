@@ -20,10 +20,10 @@
 - [x] canada-internship collector (parse Markdown tables in the Tech sections) + tests
 - [x] Filter (excluded keywords, etc.) + tests
 - [x] Cross-source dedup (URL normalization, company + title) + tests
-- [ ] Discord warning on source anomalies (e.g. 0 rows collected)
-- [ ] Fetch existing `Job ID`s from Notion
-- [ ] Add new postings to Notion
-- [ ] Send Discord summary (skip when there are 0 new postings)
+- [x] Discord warning on source anomalies (e.g. 0 rows collected)
+- [x] Fetch existing `Job ID`s from Notion
+- [x] Add new postings to Notion
+- [x] Send Discord summary (skip when there are 0 new postings)
 - [ ] Wire the whole flow in `main.py`, verify a local run
 - [ ] GitHub Actions workflow (cron + manual trigger), register Secrets
 - [ ] Verify a real run on Actions
@@ -32,7 +32,7 @@
 ## 1.5 Portfolio — Public Board
 - [x] `board.py`: active postings of publish regions → `site/jobs.json` (no personal fields) + tests
 - [x] `site/` static page: list, track / city / source filters, search, "new" badge, source attribution
-- [ ] Add a Pages deploy step to `collect.yml`
+- [x] Add a Pages deploy step to `collect.yml`
 - [x] `ci.yml`: tests + lint
 - [ ] README: problem, architecture diagram, board link, screenshots, how to run, source attribution, CI badge
 
