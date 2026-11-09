@@ -37,7 +37,7 @@ GitHub Actions (cron)
         1. config.yaml 로드
         2. enabled인 지역마다 반복
            a. 켜진 출처(sources/*)에서 트랙(인턴/신입)별 공고 수집
-           b. filter.py → 지역(국가)·카테고리·제외어 필터
+           b. filter.py → 지역(국가)·카테고리·필수 직무 키워드·제외어 필터
            c. 출처 간 중복 병합 (URL, 회사+제목 기준)
            d. notion_store.py → 지역의 Notion DB에서 기존 Job ID 조회, 새 공고만 추가
            e. notify가 true면 notify_discord.py → 지역의 Discord 웹훅으로 요약 전송

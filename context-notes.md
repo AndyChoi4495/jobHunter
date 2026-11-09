@@ -112,6 +112,16 @@ Decisions:
 - **Re-running is safe:** Notion dedupe skips known `Job ID`s, and Discord stays quiet when there are 0 new postings.
 - **Follow-up:** GitHub warns that `checkout@v4`, `setup-python@v5`, and `configure-pages@v5` target the deprecated Node.js 20 (currently forced onto Node 24). Bump their major versions later.
 
+## 2026-11-09 — Filter Quality: Role Keywords
+
+- **Problem:** about 10% of postings weren't dev roles (business/BI, marketing, raters, IT support, hardware/FPGA). canada-internship's "Tech" section is broad, and Simplify's AI/ML/Data category includes gig work.
+- **Two layers:** a title must contain an `include_title_keywords` role word, and any `exclude_title_keywords` match still drops it (exclusion wins). Both use whole-word, case-insensitive matching, so word forms (engineer / engineering, French forms) are listed explicitly.
+- **The user's scope:** keep software/dev, Data/AI/Research, and QA/Test. Drop IT/Network/Systems, Hardware/FPGA/Embedded, business/BI, marketing/sales, banking, raters.
+- **Exclusions are phrases, not single broad words**, where a broad word hits real dev roles. `business` dropped "Application Developer Co-op – Enterprise Technology & Business Management", so it became `business analyst`, `business intelligence`, and the like. `sales` dropped "Data Analyst Intern – Global Sales", so it became `sales strategy` and `sales representative`.
+- **`engineer` alone lets in other kinds of engineering**, so mechatronics, automotive, power system, firmware, certification, etc. are excluded. Compiler, kernel, Linux, and Forward Deployed engineer roles still pass.
+- **Known trade-off:** `fpga` also drops "FPGA Software Tool Developer Co-op". Accepted for simplicity.
+- **Result on 2026-11-09 data:** 838 → 650 Canada postings. Pages already in Notion aren't removed by this; the board rebuilds every run, so it updates on its own.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.

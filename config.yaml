@@ -22,7 +22,33 @@ tracks:
       - associate software engineer
       - entry level software developer
 
-exclude_title_keywords: [senior, sr., staff, principal, lead, manager, director, language specialist, ai trainer]
+# A title must contain at least one of these role words (whole-word, case-insensitive).
+include_title_keywords: [
+  software, developer, developers, development, programmer, programming, coding,
+  engineer, engineers, engineering, ingenierie, ingénierie,
+  développeur, developpeur, développement, developpement, logiciel, logiciels,
+  devops, mlops, sre, full stack, full-stack, fullstack, frontend, front-end, front end,
+  backend, back-end, back end, web, mobile, ios, android, cloud, platform, infrastructure,
+  computer, automation,
+  data, données, donnees, analytics, machine learning, ml, ai, genai, llm, nlp,
+  artificial intelligence, intelligence artificielle, deep learning, computer vision,
+  research, researcher, scientist, science,
+  qa, quality assurance, test, testing, tester,
+]
+
+# Titles containing any of these are dropped, even if they match an include word.
+exclude_title_keywords: [
+  senior, sr., staff, principal, lead, manager, director,
+  language specialist, ai trainer, rater, annotator,
+  business analyst, business analytics, business intelligence, business development,
+  business advisor, business partner, business strategy, business operations,
+  marketing, sales strategy, sales representative, banking, coordinator, consulting,
+  information technology, technologie de l'information, network analyst, systems analyst,
+  help desk, service desk, it support, technical support, desktop support,
+  hardware, fpga, asic, firmware, mechanical, electrical, mechatronics, manufacturing, physical design,
+  silicon, civil, chemical, automotive, controls engineer, power system, pipeline, field engineering,
+  certification, hvp, procedes, desktop, networking, network systems,
+]
 
 regions:
   canada:

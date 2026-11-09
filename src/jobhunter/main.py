@@ -80,7 +80,9 @@ def main() -> int:
     all_jobs = [j for rows in raw.values() for j in rows]
     published: List[Job] = []
     for r in regions:
-        jobs = dedupe(filter_jobs(all_jobs, r, cfg.exclude_title_keywords))
+        jobs = dedupe(filter_jobs(
+            all_jobs, r, cfg.exclude_title_keywords, cfg.include_title_keywords
+        ))
         if r.publish:
             published.extend(jobs)
         if dry_run:

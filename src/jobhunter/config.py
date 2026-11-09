@@ -57,6 +57,7 @@ class Config:
     sources: SourcesConfig
     tracks: Dict[Track, TrackConfig]
     exclude_title_keywords: List[str]
+    include_title_keywords: List[str]
     regions: Dict[str, RegionConfig]
 
     def enabled_regions(self) -> List[RegionConfig]:
@@ -85,6 +86,7 @@ def load_config(path: Union[str, Path] = "config.yaml") -> Config:
             for name, t in raw["tracks"].items()
         },
         exclude_title_keywords=list(raw["exclude_title_keywords"]),
+        include_title_keywords=list(raw["include_title_keywords"]),
         regions={
             name: RegionConfig(
                 name=name,

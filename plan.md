@@ -37,7 +37,7 @@ GitHub Actions (cron)
         1. Load config.yaml
         2. For each enabled region
            a. Collect postings per track (intern / new grad) from enabled sources (sources/*)
-           b. filter.py → region (country), category, excluded-keyword filters
+           b. filter.py → region (country), category, required role keyword, excluded-keyword filters
            c. Merge cross-source duplicates (by URL, company + title)
            d. notion_store.py → fetch existing Job IDs from the region's Notion DB, add only new postings
            e. If notify is true, notify_discord.py → send a summary to the region's Discord webhook

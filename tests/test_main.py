@@ -25,7 +25,7 @@ def env(monkeypatch):
     monkeypatch.setattr(m.simplify, "fetch", lambda cfg: [job(1), job(2), job(3, "us")])
     monkeypatch.setattr(m.canada_internship, "fetch", lambda: [job(4)])
     monkeypatch.setattr(
-        m, "filter_jobs", lambda jobs, r, kw: [j for j in jobs if j.country == r.country]
+        m, "filter_jobs", lambda jobs, r, kw, inc: [j for j in jobs if j.country == r.country]
     )
     monkeypatch.setattr(m, "dedupe", lambda jobs: list(jobs))
     monkeypatch.setattr(m.notion_store, "existing_job_ids", lambda t, d: {"id1"})

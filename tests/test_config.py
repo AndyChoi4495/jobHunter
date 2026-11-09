@@ -25,6 +25,7 @@ def test_tracks_and_exclusions():
     assert set(cfg.tracks) == {Track.INTERN, Track.NEW_GRAD}
     assert cfg.tracks[Track.INTERN].queries
     assert "senior" in cfg.exclude_title_keywords
+    assert "software" in cfg.include_title_keywords
 
 
 def test_regions():

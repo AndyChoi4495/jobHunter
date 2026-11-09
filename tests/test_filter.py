@@ -26,3 +26,21 @@ def test_keywords_case_insensitive_and_literal():
 def test_word_boundaries():
     titles = ["Leading Edge Intern", "Seniority Analyst", "Srx Engineer"]
     assert len(filter_jobs([job(t) for t in titles], REGION, KW)) == 3
+
+
+INCLUDE = ["software", "developer", "engineer", "data", "qa"]
+
+
+def test_include_requires_a_role_word():
+    titles = ["Software Intern", "Data Analyst", "QA Co-op", "Relevance Rater", "Coordinator"]
+    out = filter_jobs([job(t) for t in titles], REGION, KW, INCLUDE)
+    assert [j.title for j in out] == ["Software Intern", "Data Analyst", "QA Co-op"]
+
+
+def test_exclude_wins_over_include():
+    out = filter_jobs([job("Senior Software Engineer")], REGION, KW, INCLUDE)
+    assert out == []
+
+
+def test_empty_include_keeps_everything():
+    assert len(filter_jobs([job("Relevance Rater")], REGION, KW, [])) == 1
