@@ -1,0 +1,23 @@
+# 비밀값
+.env
+.env.*
+!.env.example
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+*.egg-info/
+dist/
+build/
+
+# 로컬 산출물
+site/jobs.json
+
+# OS / 에디터
+.DS_Store
+.idea/
+.vscode/
