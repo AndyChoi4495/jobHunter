@@ -1,0 +1,34 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>jobHunter Board</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>jobHunter Board</h1>
+    <p id="meta" class="muted">Loading…</p>
+  </header>
+  <main>
+    <section class="filters">
+      <input id="q" type="search" placeholder="Search company, title, location" aria-label="Search">
+      <select id="track" aria-label="Track"><option value="">All tracks</option></select>
+      <select id="city" aria-label="City"><option value="">All cities</option></select>
+      <select id="source" aria-label="Source"><option value="">All sources</option></select>
+    </section>
+    <p id="count" class="muted"></p>
+    <ul id="list"></ul>
+  </main>
+  <footer>
+    <p>Postings are collected from community-maintained lists:
+      <a href="https://github.com/SimplifyJobs/New-Grad-Positions" rel="noopener noreferrer">SimplifyJobs/New-Grad-Positions</a>,
+      <a href="https://github.com/SimplifyJobs/Summer2027-Internships" rel="noopener noreferrer">SimplifyJobs/Summer2027-Internships</a>, and
+      <a href="https://github.com/Francklin9999/canada-internship" rel="noopener noreferrer">Francklin9999/canada-internship</a>.
+      Thanks to their maintainers.</p>
+    <p>Application links go to the original postings. This board is read-only.</p>
+  </footer>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -30,8 +30,8 @@
 - [ ] Tune queries and exclusions after 1–2 weeks of use
 
 ## 1.5 Portfolio — Public Board
-- [ ] `board.py`: active postings of publish regions → `site/jobs.json` (no personal fields) + tests
-- [ ] `site/` static page: list, track / city / source filters, search, "new" badge, source attribution
+- [x] `board.py`: active postings of publish regions → `site/jobs.json` (no personal fields) + tests
+- [x] `site/` static page: list, track / city / source filters, search, "new" badge, source attribution
 - [ ] Add a Pages deploy step to `collect.yml`
 - [x] `ci.yml`: tests + lint
 - [ ] README: problem, architecture diagram, board link, screenshots, how to run, source attribution, CI badge
