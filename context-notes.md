@@ -119,6 +119,7 @@ Decisions:
 - **The user's scope:** keep software/dev, Data/AI/Research, and QA/Test. Drop IT/Network/Systems, Hardware/FPGA/Embedded, business/BI, marketing/sales, banking, raters.
 - **Exclusions are phrases, not single broad words**, where a broad word hits real dev roles. `business` dropped "Application Developer Co-op – Enterprise Technology & Business Management", so it became `business analyst`, `business intelligence`, and the like. `sales` dropped "Data Analyst Intern – Global Sales", so it became `sales strategy` and `sales representative`.
 - **`engineer` alone lets in other kinds of engineering**, so mechatronics, automotive, power system, firmware, certification, etc. are excluded. Compiler, kernel, Linux, and Forward Deployed engineer roles still pass.
+- **Security roles stay out** (e.g. "Security Analyst Intern"): `security` is not a role word, by the user's choice. Security *engineering* titles still pass via `engineer`.
 - **Known trade-off:** `fpga` also drops "FPGA Software Tool Developer Co-op". Accepted for simplicity.
 - **Result on 2026-11-09 data:** 838 → 650 Canada postings. Pages already in Notion aren't removed by this; the board rebuilds every run, so it updates on its own.
 
