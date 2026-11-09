@@ -39,7 +39,7 @@
 ## JSearch 보조 출처 (원할 때)
 - [x] RapidAPI에서 JSearch 구독, API 키 발급, 무료 할당량 확인 (월 200회)
 - [x] JSearch 수집기 + 테스트, config에서 활성화
-- [ ] GitHub에 `JSEARCH_API_KEY` Secret 등록
+- [x] GitHub에 `JSEARCH_API_KEY` Secret 등록
 - [ ] 2주 뒤(2026-11-23쯤) 점검: JSearch 공고 중 지원할 만한 게 몇 건이었나? 유지 또는 중단
 
 ## 미국 확장 (원할 때)

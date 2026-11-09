@@ -39,7 +39,7 @@
 ## JSearch Extra Source (optional)
 - [x] Subscribe to JSearch on RapidAPI, get API key, check free quota (200/month)
 - [x] JSearch collector + tests, enable in config
-- [ ] Register the `JSEARCH_API_KEY` Secret on GitHub
+- [x] Register the `JSEARCH_API_KEY` Secret on GitHub
 - [ ] Review after 2 weeks (around 2026-11-23): how many JSearch postings were worth applying to? Keep or drop
 
 ## USA Expansion (optional)
