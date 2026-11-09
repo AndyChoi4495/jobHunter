@@ -2,7 +2,7 @@
 
 ## 0. 준비
 - [x] git 저장소 초기화 (noreply 이메일 설정)
-- [ ] GitHub **공개** 저장소 생성, 첫 푸시
+- [x] GitHub **공개** 저장소 생성, 첫 푸시
 - [ ] 저장소 설정: 외부 기여자 PR의 Actions 실행에 승인 필요, Pages 소스를 GitHub Actions로 설정
 - [ ] Python 프로젝트 셋업 (pyproject.toml, 테스트 도구)
 - [x] `.gitignore`에 `.env` 추가
