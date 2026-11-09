@@ -76,6 +76,15 @@
 - **`requests`는 처음부터 의존성에 넣었다.** 수집기, Notion, Discord 모두 HTTP 요청을 보낸다.
 - **로컬 셋업에는 새 pip가 필요하다.** 시스템 pip 21.2.4는 pyproject 기반 editable 설치를 못 하므로 `.venv` 안에서 pip를 먼저 올린다.
 
+## 2026-11-09 — 수집기, 필터, 중복 병합
+
+- **기본 브랜치가 `main`이 아니다.** SimplifyJobs 저장소는 `dev`, canada-internship은 `master`다. 각 수집 모듈에 `BRANCH` 상수로 둔다.
+- **Simplify는 위치 문자열마다 국가를 판별한다.** 캐나다를 먼저 본다("Canada", "CAN", 주 약어). 미국은 주 약어, SF/NYC/LA, 주 이름, "United States"로 판별한다. "CA" 단독은 캐나다가 아니라 캘리포니아다. 두 나라에 걸친 공고는 나라마다 `Job` 하나씩 만들고, 캐나다·미국 위치가 없는 공고는 버린다.
+- **canada-internship은 Tech 섹션 안에서 `<a href=` 링크가 있는 표 행만 파싱한다.** HTML 엔티티를 풀고 "NEW " 접두어를 뗀다. 형식이 바뀌면 예외 대신 0건이 나오고, main.py가 0건 경고를 보낸다.
+- **제외 키워드는 단어 경계로 매칭한다**(`re.escape`, 대소문자 무시). "senior"가 "seniority"에 걸리지 않고, "sr."은 글자 그대로 매칭된다.
+- **중복은 `job_id`가 같거나 회사 + 제목 + 국가가 같으면 합친다.** 먼저 나온 쪽을 남기며, 카테고리가 있는 Simplify를 먼저 넘긴다. canada-internship 링크는 대부분 LinkedIn이라 출처 간 병합은 주로 회사 + 제목에 기댄다.
+- **실제 데이터 첫 dry run(2026-11-09)**: Simplify 5361건, canada-internship 645건 → 필터와 병합 후 캐나다 공고 842건.
+
 ## 열린 질문
 
 - 3단계(이력서 맞춤 작성)를 Claude API로 자동화할지, Muse가 Notion 페이지를 읽고 작성하도록 수동으로 맡길지 정하지 않았다.

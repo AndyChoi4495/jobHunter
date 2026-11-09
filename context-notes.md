@@ -75,6 +75,15 @@ Decisions:
 - **`requests` is a dependency from the start**, since sources, Notion, and Discord all make HTTP calls.
 - **Local setup needs a newer pip:** the system pip 21.2.4 can't do editable installs from pyproject, so upgrade pip inside `.venv` first.
 
+## 2026-11-09 — Sources, Filter, Dedupe
+
+- **Default branches are not `main`:** SimplifyJobs repos use `dev`, canada-internship uses `master`. Stored as `BRANCH` constants in each source module.
+- **Country is classified per Simplify location string** (Canada checked first: "Canada", "CAN", province codes; US: state codes, SF/NYC/LA, bare state names, "United States"). "CA" alone means California, not Canada. A listing spanning both countries becomes one `Job` per country; listings with no CA/US location are dropped.
+- **canada-internship parsing** takes only table rows with an `<a href=` link inside the Tech section, unescapes HTML, and drops the "NEW " prefix. A format change yields 0 rows rather than an exception, and main.py warns on 0 rows.
+- **Excluded keywords match on word boundaries** (`re.escape`, case-insensitive), so "senior" doesn't hit "seniority" and "sr." matches literally.
+- **Dedupe merges on equal `job_id` or equal company + title + country**, first occurrence wins (Simplify is passed first since it has a category). canada-internship links are mostly LinkedIn, so cross-source merging relies mainly on company + title.
+- **First real-data dry run (2026-11-09):** Simplify 5361 rows, canada-internship 645 rows → 842 Canada postings after filter and dedupe.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.

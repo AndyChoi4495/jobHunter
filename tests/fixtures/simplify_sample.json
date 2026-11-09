@@ -1,0 +1,107 @@
+[
+ {
+  "source": "Simplify",
+  "category": "Software",
+  "company_name": "TribalScale",
+  "title": "Agile Software Engineer Co-op",
+  "active": true,
+  "date_posted": 1781043462,
+  "url": "https://job-boards.greenhouse.io/tribalscale/jobs/4687337006",
+  "locations": [
+   "Toronto, ON, Canada"
+  ],
+  "is_visible": true
+ },
+ {
+  "source": "Simplify",
+  "category": "Software",
+  "company_name": "Creatify Lab ",
+  "title": "Software Engineer Intern",
+  "active": true,
+  "date_posted": 1773824945,
+  "url": "https://jobs.ashbyhq.com/creatify/75a1f1ad-13d2-4513-952c-71b6dfcaa84f/application",
+  "locations": [
+   "Mountain View, CA"
+  ],
+  "is_visible": true
+ },
+ {
+  "source": "Simplify",
+  "category": "AI/ML/Data",
+  "company_name": "Brookfield",
+  "title": "Artificial Intelligence Intern - Renewable Power & Transition",
+  "active": true,
+  "date_posted": 1778942352,
+  "url": "https://brookfield.wd5.myworkdayjobs.com/brookfieldprivate/job/New-York-New-York/Artificial-Intelligence-Intern--Renewable-Power---Transition_R2048741",
+  "locations": [
+   "Toronto, ON, Canada",
+   "NYC"
+  ],
+  "is_visible": true
+ },
+ {
+  "source": "Simplify",
+  "category": "Software",
+  "company_name": "The Campbell's Company",
+  "title": "Agentic AI Engineer Co-op",
+  "active": true,
+  "date_posted": 1781638986,
+  "url": "https://campbellsoup.wd5.myworkdayjobs.com/externalcareers_globalsite/job/USA---Remote/Agentic-AI-Engineer-Co-Op_Req-66015",
+  "locations": [
+   "Remote in USA"
+  ],
+  "is_visible": true
+ },
+ {
+  "source": "Simplify",
+  "category": "Software",
+  "company_name": "Intropic",
+  "title": "Quantrepreneur - Quantitative Development",
+  "active": true,
+  "date_posted": 1774275736,
+  "url": "https://jobs.lever.co/intropic/c31c65cc-178d-4a50-bc6a-4f4b057f4381/apply",
+  "locations": [
+   "London, UK"
+  ],
+  "is_visible": true
+ },
+ {
+  "source": "Simplify",
+  "category": "Hardware",
+  "company_name": "Hewlett Packard (HP)",
+  "title": "Browser Software Engineer Intern",
+  "active": true,
+  "date_posted": 1773672342,
+  "url": "https://hp.wd5.myworkdayjobs.com/externalcareersite/job/Cambridge-Cambridgeshire-United-Kingdom/Browser-Software-Engineer-Intern_3160410-1",
+  "locations": [
+   "Cambridge, UK"
+  ],
+  "is_visible": true
+ },
+ {
+  "source": "Simplify",
+  "category": "Software",
+  "company_name": "State of Nebraska",
+  "title": "Student Intern - IT Construction Systems",
+  "active": false,
+  "date_posted": 1773642451,
+  "url": "https://son.wd108.myworkdayjobs.com/NebraskaStateCareers/job/Lincoln-NE/Student-Intern---IT-Construction-Systems_JR2026-00023390",
+  "locations": [
+   "Lincoln, NE"
+  ],
+  "is_visible": true
+ },
+ {
+  "source": "AlmondCroffle",
+  "category": "Software Engineering",
+  "company_name": "Geneva Trading",
+  "title": "Junior Software Engineer",
+  "active": true,
+  "date_posted": 1774263048,
+  "url": "https://job-boards.greenhouse.io/genevatrading/jobs/5085231007",
+  "locations": [
+   "Chicago, IL"
+  ],
+  "is_visible": false
+ }
+]

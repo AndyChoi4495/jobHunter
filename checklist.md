@@ -16,10 +16,10 @@
 ## 1. MVP — Collection + Alerts
 - [x] `config.yaml` schema and loader (tracks, regions, enabled/notify flags)
 - [x] Define the `Job` model
-- [ ] Simplify collector (listings.json → `Job`; active, visible, category, country detection) + tests
-- [ ] canada-internship collector (parse Markdown tables in the Tech sections) + tests
-- [ ] Filter (excluded keywords, etc.) + tests
-- [ ] Cross-source dedup (URL normalization, company + title) + tests
+- [x] Simplify collector (listings.json → `Job`; active, visible, category, country detection) + tests
+- [x] canada-internship collector (parse Markdown tables in the Tech sections) + tests
+- [x] Filter (excluded keywords, etc.) + tests
+- [x] Cross-source dedup (URL normalization, company + title) + tests
 - [ ] Discord warning on source anomalies (e.g. 0 rows collected)
 - [ ] Fetch existing `Job ID`s from Notion
 - [ ] Add new postings to Notion

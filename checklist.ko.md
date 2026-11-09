@@ -16,10 +16,10 @@
 ## 1. MVP — 수집 + 알림
 - [x] `config.yaml` 스키마와 로더 (tracks, regions, enabled/notify 플래그)
 - [x] `Job` 모델 정의
-- [ ] Simplify 수집기 (listings.json → `Job`, active·visible·카테고리·국가 판별) + 테스트
-- [ ] canada-internship 수집기 (Tech 섹션 마크다운 표 파싱) + 테스트
-- [ ] 필터 (제외 키워드 등) + 테스트
-- [ ] 출처 간 중복 병합 (URL 정규화, 회사+제목) + 테스트
+- [x] Simplify 수집기 (listings.json → `Job`, active·visible·카테고리·국가 판별) + 테스트
+- [x] canada-internship 수집기 (Tech 섹션 마크다운 표 파싱) + 테스트
+- [x] 필터 (제외 키워드 등) + 테스트
+- [x] 출처 간 중복 병합 (URL 정규화, 회사+제목) + 테스트
 - [ ] 수집 0건 등 출처 이상 시 Discord 경고
 - [ ] Notion 기존 `Job ID` 조회
 - [ ] Notion 새 공고 추가
