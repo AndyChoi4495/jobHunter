@@ -106,6 +106,12 @@ Decisions:
 - **Notion view sorting is manual:** the API version we use can't set view sorts, so the DB view is sorted by `Posted` descending in the Notion UI.
 - **`posted` is still a date, so same-day postings aren't ordered by time.** Simplify's `date_posted` has the exact time, but canada-internship only gives a date. The user decided day-level ordering is enough, so `posted` stays a date.
 
+## 2026-11-09 — First Actions Run
+
+- **The first `collect` run failed at `configure-pages`** because Pages wasn't enabled yet; `main` itself had succeeded, so Notion and Discord were already done and the board simply wasn't deployed. After setting Pages → Source to GitHub Actions, a fresh run passed every step, and the board went live at https://andychoi4495.github.io/jobHunter/ with 839 postings.
+- **Re-running is safe:** Notion dedupe skips known `Job ID`s, and Discord stays quiet when there are 0 new postings.
+- **Follow-up:** GitHub warns that `checkout@v4`, `setup-python@v5`, and `configure-pages@v5` target the deprecated Node.js 20 (currently forced onto Node 24). Bump their major versions later.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.

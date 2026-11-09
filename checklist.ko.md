@@ -8,9 +8,9 @@
 - [ ] 저장소 설정: 외부 기여자 PR의 Actions 실행에 승인 필요, Pages 소스를 GitHub Actions로 설정
 - [x] Python 프로젝트 셋업 (pyproject.toml, 테스트 도구)
 - [x] `.gitignore`에 `.env` 추가
-- [ ] Notion 통합(Integration) 생성, 토큰 발급
-- [ ] 캐나다용 Notion DB 생성 (plan.ko.md 속성 표 기준), 통합에 DB 공유
-- [ ] Discord 캐나다 알림 채널에 웹훅 생성
+- [x] Notion 통합(Integration) 생성, 토큰 발급
+- [x] 캐나다용 Notion DB 생성 (plan.ko.md 속성 표 기준), 통합에 DB 공유
+- [x] Discord 캐나다 알림 채널에 웹훅 생성
 - [x] 검색 조건 확정 (인턴·신입 SWE, 캐나다 우선, 원격 무관)
 
 ## 1. MVP — 수집 + 알림
@@ -24,9 +24,9 @@
 - [x] Notion 기존 `Job ID` 조회
 - [x] Notion 새 공고 추가
 - [x] Discord 요약 메시지 전송 (새 공고 0건이면 생략)
-- [ ] `main.py`로 전체 흐름 연결, 로컬 실행 확인
-- [ ] GitHub Actions 워크플로 (cron + 수동 실행), Secrets 등록
-- [ ] Actions에서 실제 실행 확인
+- [x] `main.py`로 전체 흐름 연결, 로컬 실행 확인
+- [x] GitHub Actions 워크플로 (cron + 수동 실행), Secrets 등록
+- [x] Actions에서 실제 실행 확인
 - [ ] 1~2주 운영 후 검색어·제외어 조정
 
 ## 1.5 포트폴리오 — 공개 보드

@@ -107,6 +107,12 @@
 - **Notion 보기 정렬은 직접 설정한다.** 우리가 쓰는 API 버전으로는 보기 정렬을 바꿀 수 없으므로, Notion 화면에서 DB 보기를 `Posted` 내림차순으로 정렬한다.
 - **`posted`는 아직 날짜라서 같은 날 올라온 공고끼리는 시간순으로 정렬되지 않는다.** Simplify의 `date_posted`에는 정확한 시각이 있지만 canada-internship은 날짜만 준다. 사용자가 날짜 단위 정렬이면 충분하다고 정해서 `posted`는 날짜로 둔다.
 
+## 2026-11-09 — 첫 Actions 실행
+
+- **첫 `collect` 실행은 `configure-pages`에서 실패했다.** Pages가 아직 켜져 있지 않았기 때문이다. `main`은 이미 성공해서 Notion과 Discord 작업은 끝났고, 보드만 배포되지 않았다. Pages → Source를 GitHub Actions로 바꾼 뒤 새로 실행하자 모든 단계가 통과했고, 보드가 https://andychoi4495.github.io/jobHunter/ 에 공고 839건으로 올라갔다.
+- **다시 실행해도 안전하다.** Notion 중복 제거가 이미 있는 `Job ID`를 건너뛰고, 새 공고가 0건이면 Discord는 아무것도 보내지 않는다.
+- **후속 작업:** GitHub가 `checkout@v4`, `setup-python@v5`, `configure-pages@v5`가 지원 종료된 Node.js 20용이라고 경고한다(지금은 Node 24로 강제 실행된다). 나중에 메이저 버전을 올린다.
+
 ## 열린 질문
 
 - 3단계(이력서 맞춤 작성)를 Claude API로 자동화할지, Muse가 Notion 페이지를 읽고 작성하도록 수동으로 맡길지 정하지 않았다.

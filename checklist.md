@@ -8,9 +8,9 @@
 - [ ] Repo settings: require approval for Actions on outside-contributor PRs, set Pages source to GitHub Actions
 - [x] Python project setup (pyproject.toml, test tooling)
 - [x] Add `.env` to `.gitignore`
-- [ ] Create Notion integration, get token
-- [ ] Create Canada Notion DB (per the property table in plan.md), share it with the integration
-- [ ] Create a webhook in the Discord Canada alert channel
+- [x] Create Notion integration, get token
+- [x] Create Canada Notion DB (per the property table in plan.md), share it with the integration
+- [x] Create a webhook in the Discord Canada alert channel
 - [x] Finalize search criteria (intern / new grad SWE, Canada first, remote doesn't matter)
 
 ## 1. MVP — Collection + Alerts
@@ -24,9 +24,9 @@
 - [x] Fetch existing `Job ID`s from Notion
 - [x] Add new postings to Notion
 - [x] Send Discord summary (skip when there are 0 new postings)
-- [ ] Wire the whole flow in `main.py`, verify a local run
-- [ ] GitHub Actions workflow (cron + manual trigger), register Secrets
-- [ ] Verify a real run on Actions
+- [x] Wire the whole flow in `main.py`, verify a local run
+- [x] GitHub Actions workflow (cron + manual trigger), register Secrets
+- [x] Verify a real run on Actions
 - [ ] Tune queries and exclusions after 1–2 weeks of use
 
 ## 1.5 Portfolio — Public Board
