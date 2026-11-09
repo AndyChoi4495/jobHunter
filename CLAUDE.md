@@ -135,6 +135,14 @@ When something fails:
 
 This is the step LLMs skip most often after "run tests". They guess from error keywords and apply the most-recent-pattern fix. That's how a one-line bug becomes a three-file refactor.
 
+## 11. Agent Team Rules
+
+**Applies to every teammate in an agent team, and to the lead when running one.**
+
+- **No broadcast.** Never send a message to all teammates at once. Message only the specific teammate (or the lead) who needs it.
+- **Shut down immediately when done.** Once your assigned task is finished and reported to the lead, end your session. Don't idle, don't pick up unassigned work.
+- **3-iteration limit.** Any loop (plan revision after rejection, fix → test → fix, retrying a failing step) runs at most 3 times. After the 3rd failed attempt, stop and report to the lead what was tried and what's blocking, instead of trying again.
+
 ---
 
 **These guidelines are working if:** fewer unnecessary changes in diffs, fewer rewrites due to overcomplication, and clarifying questions come before implementation rather than after mistakes.
