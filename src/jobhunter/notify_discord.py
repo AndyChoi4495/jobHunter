@@ -33,7 +33,9 @@ def send_summary(webhook_url: str, region_name: str, jobs: List[Job]) -> None:
     lines = ["**%d new postings (%s)**" % (len(jobs), region_name)]
     size = len(lines[0])
     shown = 0
-    for job in jobs:
+    # Newest posted first (undated last), so truncation never hides the freshest postings.
+    ordered = sorted(jobs, key=lambda j: j.posted.toordinal() if j.posted else 0, reverse=True)
+    for job in ordered:
         line = _line(job)
         if size + len(line) + 1 > BUDGET:
             break

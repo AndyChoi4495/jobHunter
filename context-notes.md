@@ -100,6 +100,12 @@ Decisions:
 - **A 3-posting smoke test against the real Notion DB and Discord webhook passed** (read, write, and send). Run from a scratchpad script, not `main.py`, so the "local run" checklist item stays open.
 - **Added `language specialist` and `ai trainer` to the excluded title keywords.** Simplify files freelance "AI Trainer / Language Specialist" gigs under AI/ML/Data, and 2 of the 3 test postings were these. On the 2026-11-09 data this removes exactly 3 postings (843 → 840), all of them that kind of gig. The user doesn't want them.
 
+## 2026-11-09 — Newest Postings First
+
+- **Everything the user reads is ordered by posted date, newest first, undated last.** Applying right after a posting goes up is an advantage. The board already did this; the Discord summary now does too, so the "+N more" truncation cuts the oldest postings, never the newest.
+- **Notion view sorting is manual:** the API version we use can't set view sorts, so the DB view is sorted by `Posted` descending in the Notion UI.
+- **`posted` is still a date, so same-day postings aren't ordered by time.** Simplify's `date_posted` has the exact time, but canada-internship only gives a date.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.

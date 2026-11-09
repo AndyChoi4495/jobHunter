@@ -2,6 +2,9 @@
 # Tests for Discord message length limits and formatting
 from __future__ import annotations
 
+from dataclasses import replace
+from datetime import date
+
 from jobhunter import notify_discord
 from jobhunter.models import Job, Source, Track
 
@@ -51,3 +54,21 @@ def test_warning(monkeypatch):
     sent = capture(monkeypatch)
     notify_discord.send_warning("hook", "x" * 5000)
     assert sent[0].startswith("⚠️ ") and len(sent[0]) == 2000
+
+
+def test_summary_newest_first(monkeypatch):
+    sent = capture(monkeypatch)
+    old = replace(make(1), posted=date(2026, 11, 1))
+    undated = make(2)
+    new = replace(make(3), posted=date(2026, 11, 9))
+    notify_discord.send_summary("hook", "canada", [old, undated, new])
+    lines = sent[0].splitlines()[1:]
+    assert ["Intern 3" in lines[0], "Intern 1" in lines[1], "Intern 2" in lines[2]] == [True] * 3
+
+
+def test_truncation_keeps_newest(monkeypatch):
+    sent = capture(monkeypatch)
+    jobs = [replace(make(i), posted=date(2026, 1, 1)) for i in range(100)]
+    jobs.append(replace(make(999), posted=date(2026, 11, 9)))
+    notify_discord.send_summary("hook", "canada", jobs)
+    assert "Intern 999" in sent[0].splitlines()[1]
