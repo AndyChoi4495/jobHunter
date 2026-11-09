@@ -95,6 +95,11 @@ Decisions:
 - **JSearch isn't implemented yet**; enabling it in config only logs a line.
 - Code-complete with mocked tests; the "local run" and Actions items stay open until a real run against Notion and Discord.
 
+## 2026-11-09 — First Real Run (Smoke Test)
+
+- **A 3-posting smoke test against the real Notion DB and Discord webhook passed** (read, write, and send). Run from a scratchpad script, not `main.py`, so the "local run" checklist item stays open.
+- **Added `language specialist` and `ai trainer` to the excluded title keywords.** Simplify files freelance "AI Trainer / Language Specialist" gigs under AI/ML/Data, and 2 of the 3 test postings were these. On the 2026-11-09 data this removes exactly 3 postings (843 → 840), all of them that kind of gig. The user doesn't want them.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.
