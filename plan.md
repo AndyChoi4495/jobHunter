@@ -81,7 +81,7 @@ sources:
   canada_internship:
     enabled: true            # applies to the Canada region only
   jsearch:
-    enabled: true            # Notion + Discord only, never on the public board
+    enabled: true            # also on the public board, kept there 14 days by posted date
     run_hour: 12             # weekdays at this hour, Toronto time
 
 tracks:
@@ -114,6 +114,9 @@ regions:
     publish: false
     notion_db_env: NOTION_DB_USA
     discord_webhook_env: DISCORD_WEBHOOK_USA
+
+# Live public board. Each run reads its jobs.json to keep JSearch postings between JSearch runs.
+board_url: https://andychoi4495.github.io/jobHunter/
 ```
 
 - Secrets never go in config; only environment variable names do.
@@ -128,7 +131,7 @@ regions:
 | [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships) | Same JSON | Worldwide | Intern | Adds a `terms` field. Repo name includes the year, so it changes every season |
 | [Francklin9999/canada-internship](https://github.com/Francklin9999/canada-internship) `INTERNSHIPS.md` | Markdown table | Canada only | Intern | Only the "Tech internships" section. Links are mostly LinkedIn |
 | Same repo, `NEW_GRAD.md` | Markdown table | Canada only | New Grad | Only the "Tech new-grad roles" section |
-| JSearch API (optional) | REST JSON | Per country | By query | Weekdays at noon Toronto time. Notion + Discord only, never on the public board. Fills gaps the lists above miss |
+| JSearch API (optional) | REST JSON | Per country | By query | Weekdays at noon Toronto time. Also on the public board, carried over for 14 days by posted date. Fills gaps the lists above miss |
 
 - Everything is fetched from `raw.githubusercontent.com`. No API keys or quotas.
 - From the Simplify lists, keep only `category` Software / AI/ML/Data, and determine the country from `locations`.

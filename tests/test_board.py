@@ -73,10 +73,38 @@ def test_empty_list(tmp_path):
     assert json.loads(out.read_text())["jobs"] == []
 
 
-def test_jsearch_postings_are_never_published(tmp_path):
+def test_jsearch_postings_are_published(tmp_path):
     out = tmp_path / "jobs.json"
+    build_board([_job("JS", date(2026, 1, 2), source=Source.JSEARCH)], out)
+    assert json.loads(out.read_text())["jobs"][0]["source"] == "JSearch"
+
+
+def _prev(title, posted, source="JSearch", url=None, company="Acme"):
+    return {
+        "company": company, "title": title, "location": "", "track": "Intern",
+        "posted": posted, "source": source, "url": url or "https://example.com/" + title,
+        "remote": False, "category": "",
+    }
+
+
+def test_carries_recent_jsearch_from_previous_board(tmp_path):
+    out = tmp_path / "jobs.json"
+    previous = [
+        _prev("recent", "2026-11-01"),
+        _prev("expired", "2026-10-27"),          # older than 14 days on 2026-11-11
+        _prev("undated", None),
+        _prev("free", "2026-11-05", source="Simplify"),  # the current run owns free sources
+        _prev("same-url", "2026-11-05", url="https://www.example.com/apply/"),
+        _prev("Dev", "2026-11-05", company="ACME"),  # same company + title as current
+    ]
     build_board(
-        [_job("Kept", date(2026, 1, 1)), _job("Dropped", date(2026, 1, 2), source=Source.JSEARCH)],
-        out,
+        [_job("Dev", date(2026, 11, 10))], out, previous=previous, today=date(2026, 11, 11)
     )
-    assert [j["title"] for j in json.loads(out.read_text())["jobs"]] == ["Kept"]
+    titles = [j["title"] for j in json.loads(out.read_text())["jobs"]]
+    assert titles == ["Dev", "recent"]
+
+
+def test_carried_entries_keep_only_public_fields(tmp_path):
+    out = tmp_path / "jobs.json"
+    build_board([], out, previous=[_prev("js", "2026-11-10")], today=date(2026, 11, 11))
+    assert set(json.loads(out.read_text())["jobs"][0]) == PUBLIC_KEYS

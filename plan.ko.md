@@ -81,7 +81,7 @@ sources:
   canada_internship:
     enabled: true            # 캐나다 지역에만 적용
   jsearch:
-    enabled: true            # Notion + Discord만, 공개 보드에는 절대 안 올림
+    enabled: true            # 공개 보드에도 올림, 게시일 기준 14일 유지
     run_hour: 12             # 평일 이 시각(토론토 시간)에 실행
 
 tracks:
@@ -114,6 +114,9 @@ regions:
     publish: false
     notion_db_env: NOTION_DB_USA
     discord_webhook_env: DISCORD_WEBHOOK_USA
+
+# 공개 보드 주소. 실행마다 이곳의 jobs.json을 읽어 JSearch 실행 사이에도 JSearch 공고를 유지한다.
+board_url: https://andychoi4495.github.io/jobHunter/
 ```
 
 - 비밀값은 config에 직접 쓰지 않는다. 환경변수 이름만 적는다.
@@ -129,7 +132,7 @@ regions:
 | [SimplifyJobs/Summer2027-Internships](https://github.com/SimplifyJobs/Summer2027-Internships) | 동일 JSON | 전 세계 | 인턴 | `terms` 필드 추가. 저장소 이름에 연도가 들어 있어 매년 바뀜 |
 | [Francklin9999/canada-internship](https://github.com/Francklin9999/canada-internship) `INTERNSHIPS.md` | 마크다운 표 | 캐나다만 | 인턴 | "Tech internships" 섹션만 사용. 링크 대부분 LinkedIn |
 | 같은 저장소 `NEW_GRAD.md` | 마크다운 표 | 캐나다만 | 신입 | "Tech new-grad roles" 섹션만 사용 |
-| JSearch API (선택) | REST JSON | 국가 지정 | 검색어로 구분 | 평일 토론토 시간 정오에 실행. Notion + Discord만, 공개 보드에는 안 올림. 위 목록이 놓치는 공고 보완용 |
+| JSearch API (선택) | REST JSON | 국가 지정 | 검색어로 구분 | 평일 토론토 시간 정오에 실행. 공개 보드에도 올리고, 게시일 기준 14일 동안 이어서 유지. 위 목록이 놓치는 공고 보완용 |
 
 - 모두 `raw.githubusercontent.com`에서 받는다. API 키나 할당량이 필요 없다.
 - Simplify 목록은 `category`가 Software, AI/ML/Data인 공고만 남기고, `locations`로 국가를 판별한다.

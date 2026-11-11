@@ -42,6 +42,7 @@ def env(monkeypatch):
     monkeypatch.setattr(
         m.notify_discord, "send_warning", lambda h, msg: calls["warn"].append(msg)
     )
+    monkeypatch.setattr(m.board, "fetch_previous", lambda url: [])
     monkeypatch.setattr(
         m.board, "build_board",
         lambda js, *a, **k: calls["board"].append([j.job_id for j in js]),
@@ -129,3 +130,13 @@ def test_jsearch_skipped_in_dry_run(env, monkeypatch):
 
 def replace_source(j, source):
     return replace(j, source=source)
+
+
+def test_unreadable_live_board_only_warns(env, monkeypatch):
+    def boom(url):
+        raise RuntimeError("404")
+
+    monkeypatch.setattr(m.board, "fetch_previous", boom)
+    assert m.main() == 0
+    assert any("live board" in w for w in env["warn"])
+    assert env["board"] == [["id1", "id2", "id4"]]

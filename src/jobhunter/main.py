@@ -115,7 +115,14 @@ def main() -> int:
             log.exception("Region %s failed", r.name)
             failed = True
 
-    board.build_board(dedupe(published))
+    previous: List[dict] = []
+    try:
+        previous = board.fetch_previous(cfg.board_url)
+    except Exception:
+        log.exception("Reading the live board failed")
+        warn("Could not read the live board; JSearch postings from earlier runs drop off "
+             "until the next JSearch run.")
+    board.build_board(dedupe(published), previous=previous)
     return 1 if failed else 0
 
 

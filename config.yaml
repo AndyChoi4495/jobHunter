@@ -7,7 +7,7 @@ sources:
   canada_internship:
     enabled: true            # applies to the Canada region only
   jsearch:
-    enabled: true            # Notion + Discord only, never on the public board
+    enabled: true            # also on the public board, kept there 14 days by posted date
     run_hour: 12             # weekdays at this hour, Toronto time (free quota: 200/month)
 
 tracks:
@@ -66,3 +66,6 @@ regions:
     publish: false
     notion_db_env: NOTION_DB_USA
     discord_webhook_env: DISCORD_WEBHOOK_USA
+
+# Live public board. Each run reads its jobs.json to keep JSearch postings between JSearch runs.
+board_url: https://andychoi4495.github.io/jobHunter/

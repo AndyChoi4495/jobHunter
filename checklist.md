@@ -40,6 +40,8 @@
 ## JSearch Extra Source (optional)
 - [x] Subscribe to JSearch on RapidAPI, get API key, check free quota (200/month)
 - [x] JSearch collector + tests, enable in config
+- [x] Publish JSearch postings on the board, carried over from the live board for 14 days
+- [ ] Check the JSearch (OpenWeb Ninja) terms allow republishing on the public board
 - [x] Register the `JSEARCH_API_KEY` Secret on GitHub
 - [ ] Review after 2 weeks (around 2026-11-23): how many JSearch postings were worth applying to? Keep or drop
 

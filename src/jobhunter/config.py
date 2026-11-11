@@ -60,6 +60,7 @@ class Config:
     exclude_title_keywords: List[str]
     include_title_keywords: List[str]
     regions: Dict[str, RegionConfig]
+    board_url: str  # live public board; JSearch postings carry over from its jobs.json
 
     def enabled_regions(self) -> List[RegionConfig]:
         return [r for r in self.regions.values() if r.enabled]
@@ -103,4 +104,5 @@ def load_config(path: Union[str, Path] = "config.yaml") -> Config:
             )
             for name, r in raw["regions"].items()
         },
+        board_url=raw["board_url"],
     )

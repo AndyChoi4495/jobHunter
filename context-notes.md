@@ -139,6 +139,15 @@ Decisions:
 - **The summary is now split across as many messages as needed instead of truncating with "+N more"** (the user's choice, with no cap on the number of messages). Every new posting appears in Discord, still newest first; only the first message carries the "N new postings" header. This replaces the truncation described on 2026-11-09.
 - **2 seconds between messages** keeps a burst (e.g. a first run with hundreds of postings) under Discord's 30 messages/minute per channel limit.
 
+## 2026-11-11 — JSearch postings on the public board
+
+- **JSearch postings are now published on the board** (the user's choice). This reverses the 2026-11-09 "never on the public board" decision. The terms risk was raised first: JSearch is paid RapidAPI data that may not allow republishing, and the user is to check the JSearch (OpenWeb Ninja) terms.
+- **They carry over from the live board.** The board is rebuilt from scratch each run, but JSearch only runs at weekday noon, so the next run (within an hour, since both noon crons fire) would erase them. Each run now reads the live board's `jobs.json` (`board_url` in config) and keeps its JSearch entries whose posted date is within 14 days. Undated JSearch entries aren't carried, since they can't be aged out.
+- **Current postings win.** A carried entry is dropped if the new board already has the same URL (normalized) or the same company + title, so a fresh JSearch row or a free-source copy replaces it.
+- **Still no Notion data:** the carry-over reads only the public board, which is itself built from collected postings.
+- **A failed read only warns.** The run continues and JSearch postings from earlier runs drop off until the next JSearch run.
+- Known gap: a carried posting isn't re-filtered, so a keyword change takes up to 14 days to remove it.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.
