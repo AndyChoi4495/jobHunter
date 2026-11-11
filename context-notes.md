@@ -134,6 +134,11 @@ Decisions:
 - **Never in `DRY_RUN`**, so local testing doesn't spend quota.
 - **JSearch postings go last before dedupe**, so when a posting is also in Simplify or canada-internship, their (better, direct) link wins.
 
+## 2026-11-11 — Discord summary split into several messages
+
+- **The summary is now split across as many messages as needed instead of truncating with "+N more"** (the user's choice, with no cap on the number of messages). Every new posting appears in Discord, still newest first; only the first message carries the "N new postings" header. This replaces the truncation described on 2026-11-09.
+- **2 seconds between messages** keeps a burst (e.g. a first run with hundreds of postings) under Discord's 30 messages/minute per channel limit.
+
 ## Open Questions
 
 - Phase 3 (tailored resumes): automate with the Claude API, or leave it manual by having Muse read the Notion page and write it? Not decided.

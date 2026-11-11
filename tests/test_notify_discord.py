@@ -24,6 +24,7 @@ class Resp:
 
 def capture(monkeypatch):
     sent = []
+    monkeypatch.setattr(notify_discord.time, "sleep", lambda s: None)
     monkeypatch.setattr(
         notify_discord.requests,
         "post",
@@ -42,12 +43,15 @@ def test_summary_small(monkeypatch):
     assert "more" not in sent[0]
 
 
-def test_summary_truncates(monkeypatch):
+def test_summary_splits_without_dropping(monkeypatch):
     sent = capture(monkeypatch)
     notify_discord.send_summary("hook", "canada", [make(i) for i in range(100)])
-    assert len(sent[0]) <= 2000
-    last = sent[0].splitlines()[-1]
-    assert last.startswith("+") and last.endswith("more")
+    assert len(sent) > 1
+    assert all(len(m) <= 2000 for m in sent)
+    lines = [ln for m in sent for ln in m.splitlines()]
+    assert lines[0] == "**100 new postings (canada)**"
+    assert len(lines) == 101
+    assert not any("more" in ln for ln in lines)
 
 
 def test_warning(monkeypatch):
@@ -66,7 +70,7 @@ def test_summary_newest_first(monkeypatch):
     assert ["Intern 3" in lines[0], "Intern 1" in lines[1], "Intern 2" in lines[2]] == [True] * 3
 
 
-def test_truncation_keeps_newest(monkeypatch):
+def test_split_keeps_newest_first(monkeypatch):
     sent = capture(monkeypatch)
     jobs = [replace(make(i), posted=date(2026, 1, 1)) for i in range(100)]
     jobs.append(replace(make(999), posted=date(2026, 11, 9)))

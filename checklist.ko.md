@@ -24,6 +24,7 @@
 - [x] Notion 기존 `Job ID` 조회
 - [x] Notion 새 공고 추가
 - [x] Discord 요약 메시지 전송 (새 공고 0건이면 생략)
+- [x] Discord 요약을 여러 메시지로 나눠 누락 없이 전송
 - [x] `main.py`로 전체 흐름 연결, 로컬 실행 확인
 - [x] GitHub Actions 워크플로 (cron + 수동 실행), Secrets 등록
 - [x] Actions에서 실제 실행 확인

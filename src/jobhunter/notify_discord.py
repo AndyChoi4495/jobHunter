@@ -2,6 +2,7 @@
 # Notification module that sends new-posting summaries and warnings to a Discord webhook
 from __future__ import annotations
 
+import time
 from typing import List
 
 import requests
@@ -9,7 +10,7 @@ import requests
 from jobhunter.models import Job
 
 MAX_LEN = 2000
-BUDGET = 1900  # leave room for the "+N more" line
+PAUSE = 2  # seconds between messages; stays under Discord's 30 messages/minute per channel
 TRACK_LABELS = {"intern": "Intern", "new_grad": "New Grad"}
 
 
@@ -30,21 +31,22 @@ def _line(job: Job) -> str:
 
 
 def send_summary(webhook_url: str, region_name: str, jobs: List[Job]) -> None:
-    lines = ["**%d new postings (%s)**" % (len(jobs), region_name)]
-    size = len(lines[0])
-    shown = 0
-    # Newest posted first (undated last), so truncation never hides the freshest postings.
+    # Newest posted first (undated last), split across as many messages as needed.
     ordered = sorted(jobs, key=lambda j: j.posted.toordinal() if j.posted else 0, reverse=True)
+    messages = []
+    current = "**%d new postings (%s)**" % (len(jobs), region_name)
     for job in ordered:
         line = _line(job)
-        if size + len(line) + 1 > BUDGET:
-            break
-        lines.append(line)
-        size += len(line) + 1
-        shown += 1
-    if shown < len(jobs):
-        lines.append("+%d more" % (len(jobs) - shown))
-    _send(webhook_url, "\n".join(lines))
+        if len(current) + 1 + len(line) > MAX_LEN:
+            messages.append(current)
+            current = line
+        else:
+            current += "\n" + line
+    messages.append(current)
+    for i, content in enumerate(messages):
+        if i:
+            time.sleep(PAUSE)
+        _send(webhook_url, content)
 
 
 def send_warning(webhook_url: str, message: str) -> None:

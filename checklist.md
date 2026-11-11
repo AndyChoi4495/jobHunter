@@ -24,6 +24,7 @@
 - [x] Fetch existing `Job ID`s from Notion
 - [x] Add new postings to Notion
 - [x] Send Discord summary (skip when there are 0 new postings)
+- [x] Split the Discord summary across messages so no posting is dropped
 - [x] Wire the whole flow in `main.py`, verify a local run
 - [x] GitHub Actions workflow (cron + manual trigger), register Secrets
 - [x] Verify a real run on Actions
